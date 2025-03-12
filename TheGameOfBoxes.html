@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .board { display: grid; grid-template-columns: repeat(30, 20px); margin: 20px auto; width: 600px; }
+        .cell { width: 20px; height: 20px; border: 1px solid #ccc; background: white; }
+        .alive { background: black; }
+    </style>
+</head>
+<body>
+    <h1>Game of Life</h1>
+    <div class="board" id="board"></div>
+    <button onclick="startGame()">Start</button>
+    <button onclick="resetGame()">Reset</button>
+    <script>
+        const rows = 30, cols = 30;
+        let grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+        let running = false;
+        
+        function createBoard() {
+            const boardElement = document.getElementById("board");
+            boardElement.innerHTML = "";
+            boardElement.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    cell.addEventListener("click", toggleCell);
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+        
+        function toggleCell(event) {
+            const row = event.target.dataset.row;
+            const col = event.target.dataset.col;
+            grid[row][col] = grid[row][col] ? 0 : 1;
+            event.target.classList.toggle("alive");
+        }
+        
+        function getNextState() {
+            const newGrid = grid.map(arr => [...arr]);
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const neighbors = getLiveNeighbors(i, j);
+                    if (grid[i][j] === 1 && (neighbors < 2 || neighbors > 3)) newGrid[i][j] = 0;
+                    if (grid[i][j] === 0 && neighbors === 3) newGrid[i][j] = 1;
+                }
+            }
+            grid = newGrid;
+        }
+        
+        function getLiveNeighbors(x, y) {
+            let count = 0;
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    if (dx === 0 && dy === 0) continue;
+                    const nx = x + dx, ny = y + dy;
+                    if (nx >= 0 && nx < rows && ny >= 0 && ny < cols) {
+                        count += grid[nx][ny];
+                    }
+                }
+            }
+            return count;
+        }
+        
+        function updateBoard() {
+            const cells = document.querySelectorAll(".cell");
+            cells.forEach(cell => {
+                const row = cell.dataset.row;
+                const col = cell.dataset.col;
+                cell.classList.toggle("alive", grid[row][col] === 1);
+            });
+        }
+        
+        function startGame() {
+            running = !running;
+            if (running) runGame();
+        }
+        
+        function runGame() {
+            if (!running) return;
+            getNextState();
+            updateBoard();
+            setTimeout(runGame, 200);
+        }
+        
+        function resetGame() {
+            grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+            running = false;
+            updateBoard();
+        }
+        
+        createBoard();
+    </script>
+</body>
+</html>
