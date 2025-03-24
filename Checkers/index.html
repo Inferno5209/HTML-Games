@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkers Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-info">
+            <h1>Checkers</h1>
+            <div id="mode-select" class="mode-select">
+                <button id="vs-player" class="mode-btn active">Player vs Player</button>
+                <button id="vs-ai" class="mode-btn">Player vs AI</button>
+            </div>
+            <div id="status">Black's turn</div>
+            <div id="captured">
+                <div class="captured-pieces">
+                    <span>Captured Red: </span>
+                    <span id="captured-red">0</span>
+                </div>
+                <div class="captured-pieces">
+                    <span>Captured Black: </span>
+                    <span id="captured-black">0</span>
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="restart-btn">Restart Game</button>
+                <button id="undo-btn" disabled>Undo Move</button>
+            </div>
+            <div id="move-history" class="move-history">
+                <h3>Move History</h3>
+                <div id="moves-list" class="moves-list"></div>
+            </div>
+            <div class="credit">Made by Team Reilleux</div>
+        </div>
+        <div class="board-container">
+            <div id="board"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
