@@ -1,0 +1,128 @@
+/* Pillar Detail Page Styles */
+
+.pillar-detail-hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-top: 60px; /* To account for the fixed header */
+}
+
+.pillar-detail-hero h1 {
+    font-size: 2.5rem; /* Consistent with other page titles */
+    margin-bottom: 1rem;
+}
+
+.pillar-detail-content {
+    padding: 3rem 2rem;
+    background-color: var(--light-bg);
+}
+
+.pillar-detail-content .container {
+    max-width: 900px; /* Limit content width */
+    margin: 0 auto;
+}
+
+.detail-section {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem; /* Space between sections */
+}
+
+.detail-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem; /* Consistent heading size */
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.detail-section p, .detail-section li {
+    font-size: 1rem; /* Base font size for content */
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.detail-section ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.detail-section li {
+    margin-bottom: 0.5rem;
+}
+
+.example-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed #ddd;
+}
+
+.example-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.example-item h4 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pillar-detail-hero {
+        padding: 3rem 1rem;
+    }
+
+    .pillar-detail-hero h1 {
+        font-size: 2rem;
+    }
+
+    .pillar-detail-content {
+        padding: 2rem 1rem;
+    }
+
+    .detail-section {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .detail-section h3 {
+        font-size: 1.2rem;
+    }
+
+    .detail-section p, .detail-section li {
+        font-size: 0.95rem;
+    }
+
+    .example-item h4 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pillar-detail-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .detail-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .detail-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .detail-section p, .detail-section li {
+        font-size: 0.9rem;
+    }
+
+    .example-item h4 {
+        font-size: 0.95rem;
+    }
+} 
