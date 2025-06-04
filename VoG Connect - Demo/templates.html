@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates - Windham Technical High School VoG Connect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo-container">
+                <img src="assets/logo.png" alt="Windham Technical High School Logo" class="logo">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="templates.html" class="active">Templates</a>
+                <a href="student-upload.html">Student Upload</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="templates-hero">
+            <h1>Printable Templates</h1>
+            <p>Download and customize resources for your VoG journey</p>
+        </section>
+
+        <section class="filters">
+            <div class="filter-group">
+                <label for="age-group">Age Group:</label>
+                <select id="age-group">
+                    <option value="all">All Ages</option>
+                    <option value="elementary">Elementary</option>
+                    <option value="middle">Middle School</option>
+                    <option value="high">High School</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="pillar">Pillar:</label>
+                <select id="pillar">
+                    <option value="all">All Pillars</option>
+                    <option value="problem-solving">Problem Solving</option>
+                    <option value="respect">Respect</option>
+                    <option value="critical-thinking">Critical Thinking</option>
+                    <option value="work-readiness">Work Readiness</option>
+                    <option value="social-skills">Social Skills</option>
+                    <option value="effective-communication">Effective Communication</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="format">Format:</label>
+                <select id="format">
+                    <option value="all">All Formats</option>
+                    <option value="poster">Poster</option>
+                    <option value="worksheet">Worksheet</option>
+                    <option value="activity">Activity</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="templates-grid">
+            <!-- Problem Solving Templates -->
+            <div class="template-card" data-age="high" data-pillar="problem-solving" data-format="worksheet">
+                <div class="template-preview">
+                    <img src="assets/templates/problem-solving-analysis.jpg" alt="Problem Solving Analysis Worksheet">
+                </div>
+                <div class="template-info">
+                    <h3>Problem Analysis Worksheet</h3>
+                    <p>Structured template for analyzing and solving complex problems</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Problem Solving</span>
+                        <span class="format-tag">Worksheet</span>
+                    </div>
+                    <a href="resources/templates/problem-solving-analysis.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Respect Templates -->
+            <div class="template-card" data-age="all" data-pillar="respect" data-format="poster">
+                <div class="template-preview">
+                    <img src="assets/templates/respect-poster.jpg" alt="Respect Poster Template">
+                </div>
+                <div class="template-info">
+                    <h3>Respect Poster Template</h3>
+                    <p>Design your own respect-themed poster</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Respect</span>
+                        <span class="format-tag">Poster</span>
+                    </div>
+                    <a href="resources/templates/respect-poster.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Critical Thinking Templates -->
+            <div class="template-card" data-age="middle" data-pillar="critical-thinking" data-format="worksheet">
+                <div class="template-preview">
+                    <img src="assets/templates/critical-thinking-framework.jpg" alt="Critical Thinking Framework">
+                </div>
+                <div class="template-info">
+                    <h3>Critical Thinking Framework</h3>
+                    <p>Guide for developing critical thinking skills</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Critical Thinking</span>
+                        <span class="format-tag">Worksheet</span>
+                    </div>
+                    <a href="resources/templates/critical-thinking-framework.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Work Readiness Templates -->
+            <div class="template-card" data-age="high" data-pillar="work-readiness" data-format="worksheet">
+                <div class="template-preview">
+                    <img src="assets/templates/work-readiness-assessment.jpg" alt="Work Readiness Assessment">
+                </div>
+                <div class="template-info">
+                    <h3>Work Readiness Assessment</h3>
+                    <p>Self-assessment tool for workplace skills</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Work Readiness</span>
+                        <span class="format-tag">Worksheet</span>
+                    </div>
+                    <a href="resources/templates/work-readiness-assessment.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Social Skills Templates -->
+            <div class="template-card" data-age="middle" data-pillar="social-skills" data-format="activity">
+                <div class="template-preview">
+                    <img src="assets/templates/teamwork-activity.jpg" alt="Teamwork Activity">
+                </div>
+                <div class="template-info">
+                    <h3>Teamwork Activity Guide</h3>
+                    <p>Interactive activities for developing social skills</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Social Skills</span>
+                        <span class="format-tag">Activity</span>
+                    </div>
+                    <a href="resources/templates/teamwork-activity.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Effective Communication Templates -->
+            <div class="template-card" data-age="high" data-pillar="effective-communication" data-format="worksheet">
+                <div class="template-preview">
+                    <img src="assets/templates/communication-skills.jpg" alt="Communication Skills Worksheet">
+                </div>
+                <div class="template-info">
+                    <h3>Communication Skills Worksheet</h3>
+                    <p>Practice exercises for effective communication</p>
+                    <div class="template-meta">
+                        <span class="pillar-tag">Effective Communication</span>
+                        <span class="format-tag">Worksheet</span>
+                    </div>
+                    <a href="resources/templates/communication-skills.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Windham Technical High School</p>
+                <p>Address: 210 Birch St, Willimantic, CT 06226</p>
+                <p>Phone: (860) 456-3879</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://m.facebook.com/windhamtechhs/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    
+                    <a href="https://www.instagram.com/windhamtech/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Windham Technical High School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/templates.js"></script>
+</body>
+</html> 
