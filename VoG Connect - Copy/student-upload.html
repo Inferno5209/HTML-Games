@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Upload - Windham Technical High School VoG Connect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/student-upload.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo-container">
+                <img src="assets/logo.png" alt="Windham Technical High School Logo" class="logo">
+            </div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-button">Home</a>
+                <a href="templates.html" class="nav-button">Templates</a>
+                <a href="student-upload.html" class="active">Student Upload</a>
+                <a href="career-matcher.html" class="nav-button">Career Matcher</a>
+            </div>
+            <div class="auth-section">
+                <div id="auth-status" class="auth-status">
+                    <div id="login-section" class="login-section">
+                        <div id="g_id_onload"
+                             data-client_id="your-google-client-id"
+                             data-callback="handleCredentialResponse"
+                             data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-size="large"
+                             data-theme="outline"
+                             data-text="sign_in_with"
+                             data-shape="rectangular"
+                             data-logo_alignment="left">
+                        </div>
+                    </div>
+                    <div id="user-section" class="user-section" style="display: none;">
+                        <span id="user-name" class="user-name"></span>
+                        <button id="logout-btn" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="upload-hero">
+            <h1>Share Your Vision</h1>
+            <p>Upload videos showcasing your growth and experiences with the VoG pillars</p>
+        </section>
+
+        <section class="upload-section">
+            <div class="upload-container">
+                <div class="upload-form">
+                    <h2>Upload Your Video</h2>
+                    <div id="auth-required-message" class="auth-required-message">
+                        <i class="fas fa-lock"></i>
+                        <p>Please sign in with your Google account to upload videos</p>
+                    </div>
+                    <form id="video-upload-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="video-title">Video Title</label>
+                            <input type="text" id="video-title" name="title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video-description">Description</label>
+                            <textarea id="video-description" name="description" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video-file">Video File</label>
+                            <div class="file-upload">
+                                <input type="file" id="video-file" name="video" accept="video/*" required>
+                                <label for="video-file" class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Choose a video file</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Upload Video
+                        </button>
+                    </form>
+                </div>
+
+                <div class="upload-preview">
+                    <div class="preview-container">
+                        <video id="video-preview" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="preview-placeholder">
+                            <i class="fas fa-video"></i>
+                            <p>Video preview will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="gallery-header">
+                <h2>Student Video Gallery</h2>
+                <div class="gallery-filters">
+                    <select id="gallery-sort">
+                        <option value="recent">Most Recent</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="video-gallery">
+                <!-- Video cards will be dynamically added here -->
+            </div>
+
+            <div class="load-more">
+                <button class="load-more-btn">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Load More Videos
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Windham Technical High School</p>
+                <p>Address: 210 Birch St, Willimantic, CT 06226</p>
+                <p>Phone: (860) 456-3879</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://m.facebook.com/windhamtechhs/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    
+                    <a href="https://www.instagram.com/windhamtech/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Windham Technical High School. All rights reserved.</p>
+            <p class="credit">Created by Riley Joseph Santor</p>
+        </div>
+    </footer>
+
+    <!-- Upload Progress Modal -->
+    <div id="upload-progress-modal" class="modal">
+        <div class="modal-content">
+            <h3>Uploading Video</h3>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="progress-text">0%</p>
+        </div>
+    </div>
+
+    <!-- Video Playback Modal -->
+    <div id="video-playback-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <video id="playback-video" controls width="100%"></video>
+            <h3 id="playback-video-title"></h3>
+            <p id="playback-video-description"></p>
+            <div id="playback-video-meta"></div>
+        </div>
+    </div>
+
+    <script src="js/student-upload.js"></script>
+</body>
+</html> 
