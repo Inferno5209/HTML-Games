@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Galaxy Tech - File Launcher</title>
+    <link rel="icon" type="image/png" href="images/sgtlogo.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-menu a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .navbar-menu a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Add padding to body to account for fixed navbar */
+        body {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                <img src="images/sgtlogo.png" alt="Solar Galaxy Tech Logo">
+                <span>Solar Galaxy Tech</span>
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="launcher.html" class="active">Launcher</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <header>
+            <h1>🚀 Solar Galaxy Tech Launcher</h1>
+            <p class="subtitle">Upload and Launch Your Web Projects</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-card">
+                <div class="upload-icon">📁</div>
+                <h2>Upload Files or Folders</h2>
+                <p>Drag and drop or click to browse</p>
+                <input type="file" id="fileInput" multiple webkitdirectory directory />
+                <input type="file" id="singleFileInput" multiple />
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="document.getElementById('singleFileInput').click()">
+                        📄 Upload Files
+                    </button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+                        📂 Upload Folder
+                    </button>
+                </div>
+                <div id="uploadStatus" class="upload-status"></div>
+            </div>
+        </div>
+
+        <div class="projects-section">
+            <h2>📦 Uploaded Projects</h2>
+            <div id="projectsList" class="projects-grid">
+                <div class="empty-state">
+                    <p>No projects uploaded yet. Upload a folder to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rename Modal -->
+        <div id="renameModal" class="modal">
+            <div class="modal-content">
+                <h2>Rename Project</h2>
+                <input type="text" id="renameInput" placeholder="Enter new name" />
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="confirmRename()">Rename</button>
+                    <button class="btn btn-secondary" onclick="closeRenameModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
