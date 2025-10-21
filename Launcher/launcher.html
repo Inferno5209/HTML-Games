@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Galaxy Tech - Advanced Launcher</title>
+    <link rel="stylesheet" href="launcher.css">
+</head>
+<body>
+    <div class="launcher-container">
+        <!-- Header Section -->
+        <header class="launcher-header">
+            <div class="logo-section">
+                <img src="images/sgtlogo.png" alt="SGT Logo" class="logo">
+                <h1>Solar Galaxy Tech Launcher</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="settings-btn" id="settingsBtn" title="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m6-15v6m0 6v6m-12-15v6m0 6v6"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-section">
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="Search websites, games, or tools..." autocomplete="off">
+                <button class="clear-search" id="clearSearch" title="Clear">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="games">Games</button>
+            <button class="category-btn" data-category="tools">Tools</button>
+            <button class="category-btn" data-category="social">Social</button>
+            <button class="category-btn" data-category="favorites">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                Favorites
+            </button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Total Sites:</span>
+                <span class="stat-value" id="totalSites">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Favorites:</span>
+                <span class="stat-value" id="totalFavorites">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Most Launched:</span>
+                <span class="stat-value" id="mostLaunched">-</span>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <main class="launcher-grid" id="launcherGrid">
+            <!-- Items will be dynamically added here -->
+        </main>
+
+        <!-- Add Website Button -->
+        <button class="fab" id="addWebsiteBtn" title="Add Website">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Add Website Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Website</h2>
+                <button class="close-modal" id="closeAddModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="addWebsiteForm">
+                <div class="form-group">
+                    <label for="websiteName">Name</label>
+                    <input type="text" id="websiteName" required placeholder="e.g., Chess Game">
+                </div>
+                <div class="form-group">
+                    <label for="websiteUrl">URL</label>
+                    <input type="url" id="websiteUrl" required placeholder="e.g., https://example.com or /uploaded/Game/index.html">
+                </div>
+                <div class="form-group">
+                    <label for="websiteCategory">Category</label>
+                    <select id="websiteCategory" required>
+                        <option value="games">Games</option>
+                        <option value="tools">Tools</option>
+                        <option value="social">Social</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="websiteIcon">Icon (emoji or URL)</label>
+                    <input type="text" id="websiteIcon" placeholder="🎮 or https://example.com/icon.png">
+                </div>
+                <div class="form-group">
+                    <label for="websiteDescription">Description</label>
+                    <textarea id="websiteDescription" rows="3" placeholder="Brief description..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelAddBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Website</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-modal" id="closeSettingsModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="openInNewTab" checked>
+                        Open links in new tab
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="showAnimations" checked>
+                        Enable animations
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="showStats" checked>
+                        Show statistics
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="gridColumns">Grid Columns:</label>
+                    <input type="range" id="gridColumns" min="2" max="6" value="4" step="1">
+                    <span id="gridColumnsValue">4</span>
+                </div>
+                <div class="setting-item">
+                    <button class="btn btn-danger" id="clearDataBtn">Clear All Data</button>
+                </div>
+                <div class="setting-item">
+                    <button class="btn btn-secondary" id="exportDataBtn">Export Data</button>
+                    <button class="btn btn-secondary" id="importDataBtn">Import Data</button>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="contextMenu">
+        <button class="context-item" id="contextEdit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Edit
+        </button>
+        <button class="context-item" id="contextFavorite">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            Toggle Favorite
+        </button>
+        <button class="context-item" id="contextDelete">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Delete
+        </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="launcher.js"></script>
+</body>
+</html>

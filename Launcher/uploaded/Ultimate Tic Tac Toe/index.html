@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Tic Tac Toe - Ultra Modern</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">
+                <span class="title-gradient">Ultimate</span>
+                <span class="title-outline">Tic Tac Toe</span>
+            </h1>
+        </header>
+
+        <div class="main-layout">
+            <div class="left-panel">
+                <div class="player-display">
+                    <span class="label">Current Player</span>
+                    <span class="current-player" id="currentPlayer">X</span>
+                </div>
+                
+                <div class="score-board">
+                    <div class="score-item">
+                        <span class="player-x">X</span>
+                        <span id="scoreX">0</span>
+                    </div>
+                    <div class="score-divider">:</div>
+                    <div class="score-item">
+                        <span class="player-o">O</span>
+                        <span id="scoreO">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-panel">
+                <div class="game-area">
+                    <div class="ultimate-board" id="ultimateBoard">
+                        <!-- 9 mini boards will be generated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="game-status" id="gameStatus">
+                    Make your move on any mini-board!
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-reset" id="resetBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                        Reset Game
+                    </button>
+                    <button class="btn btn-new" id="newGameBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        New Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
