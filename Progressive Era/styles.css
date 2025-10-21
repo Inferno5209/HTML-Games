@@ -1,0 +1,436 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f4f1e8 0%, #e8dcc4 100%);
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-bottom: 4px solid #e67e22;
+}
+
+header h1 {
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.3rem;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border: 2px solid transparent;
+}
+
+nav a:hover {
+    background-color: #34495e;
+    transform: translateY(-2px);
+    border-color: #e67e22;
+}
+
+nav a.active {
+    background-color: #e67e22;
+    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.4);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-left: 6px solid #e67e22;
+}
+
+.page-header h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.page-header p {
+    font-size: 1.15rem;
+    color: #555;
+}
+
+/* Home Page Styles */
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.intro h2 {
+    color: #2c3e50;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.intro p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: linear-gradient(135deg, white 0%, #fafafa 100%);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-top: 4px solid #e67e22;
+    min-height: 250px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    border-top-width: 6px;
+}
+
+.card h3 {
+    color: #e67e22;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+    font-weight: 600;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #d35400 0%, #c0431f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+}
+
+/* Conservation Page Styles */
+.cartoon-display {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.cartoon-container {
+    background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    border: 3px solid #27ae60;
+}
+
+.cartoon-container img {
+    max-width: 100%;
+    height: auto;
+    border: 4px solid #2c3e50;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.cartoon-info {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.cartoon-info h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.5rem;
+}
+
+.cartoon-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Muckraker Page Styles */
+.magazine-display {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.magazine-cover {
+    background: white;
+    border: 5px solid #2c3e50;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.magazine-cover:hover {
+    transform: scale(1.02) rotate(1deg);
+}
+
+.magazine-header {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: white;
+    padding: 2.5rem;
+    text-align: center;
+    border-bottom: 3px solid #e74c3c;
+}
+
+.magazine-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-family: 'Impact', sans-serif;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+}
+
+.magazine-date {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.magazine-image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 5rem;
+    text-align: center;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-symbol {
+    font-size: 10rem;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+}
+
+.magazine-story {
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #ecf0f1 0%, #d5dbdb 100%);
+}
+
+.magazine-story h4 {
+    color: #c0392b;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.story-headline {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+.story-subtitle {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.magazine-info {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.magazine-info h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.5rem;
+}
+
+.magazine-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Suffrage Page Styles */
+.suffrage-info {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    margin-bottom: 3rem;
+    border-left: 6px solid #fff;
+}
+
+.suffrage-info h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.suffrage-info p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.comic-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.comic-panel {
+    background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+    border: 4px solid #2c3e50;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    min-height: 220px;
+    position: relative;
+}
+
+.comic-panel:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    border-color: #9b59b6;
+}
+
+.panel-number {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(155, 89, 182, 0.4);
+}
+
+.panel-year {
+    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 8px rgba(230, 126, 34, 0.4);
+    letter-spacing: 1px;
+}
+
+.panel-content {
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #9b59b6;
+}
+
+.panel-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #2c3e50;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 4rem;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+    border-top: 4px solid #e67e22;
+}
+
+footer p {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cartoon-display,
+    .magazine-display {
+        grid-template-columns: 1fr;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .comic-strip {
+        grid-template-columns: 1fr;
+    }
+}
