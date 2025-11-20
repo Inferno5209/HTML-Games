@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Munson's Chocolate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Munson's Chocolate</h1>
+            <p class="tagline">Premium Chocolate Fundraiser</p>
+            <button id="admin-btn" class="admin-button" title="Admin Access">🔐</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="product-detail-container">
+            <button id="back-to-shop" class="btn-secondary">← Back to Shopping</button>
+            
+            <div class="product-detail">
+                <div class="product-detail-image">
+                    <div class="placeholder-image">
+                        <span id="product-icon">🍫</span>
+                    </div>
+                </div>
+                
+                <div class="product-detail-info">
+                    <h1 id="product-name">Product Name</h1>
+                    <p class="product-category" id="product-category">Category</p>
+                    <p class="product-price">$<span id="product-price">0.00</span></p>
+                    
+                    <div class="product-description">
+                        <h3>Description</h3>
+                        <p id="product-description">Delicious chocolate product description will appear here.</p>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <div class="quantity-section">
+                            <label for="detail-quantity">Quantity:</label>
+                            <div class="quantity-controls">
+                                <button class="qty-btn minus">-</button>
+                                <input type="number" id="detail-quantity" class="quantity" value="1" min="1">
+                                <button class="qty-btn plus">+</button>
+                            </div>
+                        </div>
+                        
+                        <button id="add-to-cart-btn" class="btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <h3>Shopping Cart</h3>
+            <p>Total Items: <span id="cart-count">0</span></p>
+            <p>Total: $<span id="cart-total">0.00</span></p>
+            <div class="cart-buttons">
+                <button id="clear-cart-btn" class="btn-danger">Clear Cart</button>
+                <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Munson's Chocolate Fundraiser. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="product-detail.js"></script>
+</body>
+</html>
