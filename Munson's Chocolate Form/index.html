@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munson's Chocolate - Order Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Munson's Chocolate</h1>
+            <p class="tagline">Premium Chocolate Fundraiser</p>
+            <button id="admin-btn" class="admin-button" title="Admin Access">🔐</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#chocolate-bars" class="active">Chocolate Bars</a></li>
+                <li><a href="#uconn-bars">UConn Husky Bars</a></li>
+                <li><a href="#everyday-favorites">Everyday Favorites</a></li>
+                <li><a href="receipts.html">My Receipts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="cart-summary">
+            <h3>Shopping Cart</h3>
+            <p>Total Items: <span id="cart-count">0</span></p>
+            <p>Total: $<span id="cart-total">0.00</span></p>
+            <div class="cart-buttons">
+                <button id="clear-cart-btn" class="btn-danger">Clear Cart</button>
+                <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Chocolate Bars Section -->
+        <section id="chocolate-bars" class="product-section active">
+            <h2>Chocolate Bars</h2>
+            <div class="products-grid">
+                <div class="product-card" data-item="1">
+                    <h3>Item 1</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="2">
+                    <h3>Item 2</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="3">
+                    <h3>Item 3</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="4">
+                    <h3>Item 4</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UConn Husky Bars Section -->
+        <section id="uconn-bars" class="product-section">
+            <h2>UConn Husky Bars</h2>
+            <div class="products-grid">
+                <div class="product-card" data-item="5">
+                    <h3>Item 5</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="6">
+                    <h3>Item 6</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="7">
+                    <h3>Item 7</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="8">
+                    <h3>Item 8</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Everyday Favorites Section -->
+        <section id="everyday-favorites" class="product-section">
+            <h2>Everyday Favorites</h2>
+            <div class="products-grid">
+                <div class="product-card" data-item="9">
+                    <h3>Item 9</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="10">
+                    <h3>Item 10</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="11">
+                    <h3>Item 11</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="12">
+                    <h3>Item 12</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="13">
+                    <h3>Item 13</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="14">
+                    <h3>Item 14</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="15">
+                    <h3>Item 15</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="16">
+                    <h3>Item 16</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="17">
+                    <h3>Item 17</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="18">
+                    <h3>Item 18</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="19">
+                    <h3>Item 19</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="20">
+                    <h3>Item 20</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="21">
+                    <h3>Item 21</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="22">
+                    <h3>Item 22</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="23">
+                    <h3>Item 23</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="24">
+                    <h3>Item 24</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="25">
+                    <h3>Item 25</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="26">
+                    <h3>Item 26</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="27">
+                    <h3>Item 27</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="28">
+                    <h3>Item 28</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="29">
+                    <h3>Item 29</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="30">
+                    <h3>Item 30</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+                <div class="product-card" data-item="31">
+                    <h3>Item 31</h3>
+                    <p class="price">$<span class="item-price">0.00</span></p>
+                    <div class="quantity-controls">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="quantity" value="0" min="0">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Munson's Chocolate Fundraiser. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

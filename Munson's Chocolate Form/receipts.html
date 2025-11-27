@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Receipts - Munson's Chocolate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Munson's Chocolate</h1>
+            <p class="tagline">My Receipts</p>
+            <button id="admin-btn" class="admin-button" title="Admin Access">🔐</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Shop</a></li>
+                <li><a href="receipts.html" class="active">My Receipts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="receipts-container">
+            <div class="receipts-header">
+                <h2>My Order Receipts</h2>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search by order number, email, or name...">
+                    <button id="search-btn" class="btn-primary">Search</button>
+                </div>
+            </div>
+
+            <div class="filter-options">
+                <label>
+                    <input type="radio" name="date-filter" value="all" checked> All Orders
+                </label>
+                <label>
+                    <input type="radio" name="date-filter" value="today"> Today
+                </label>
+                <label>
+                    <input type="radio" name="date-filter" value="week"> This Week
+                </label>
+                <label>
+                    <input type="radio" name="date-filter" value="month"> This Month
+                </label>
+            </div>
+
+            <div id="receipts-list" class="receipts-list">
+                <!-- Receipts will be loaded here -->
+            </div>
+
+            <div id="no-receipts" class="no-receipts" style="display: none;">
+                <p>No receipts found.</p>
+                <a href="index.html" class="btn-primary">Start Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Receipt Detail Modal -->
+    <div id="receipt-modal" class="modal">
+        <div class="modal-content receipt-modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <div id="receipt-detail">
+                <!-- Detailed receipt will be loaded here -->
+            </div>
+            <div class="modal-actions">
+                <button id="print-receipt" class="btn-primary">Print Receipt</button>
+                <button id="close-receipt-modal" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Munson's Chocolate Fundraiser. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="receipts.js"></script>
+</body>
+</html>
