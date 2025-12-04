@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shanty - Testimonials - Crystal Acres</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+<body>
+    <!-- Vertical Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <div class="sidebar-logo">
+            <img src="../icon.png" alt="Crystal Acres Logo">
+        </div>
+        <ul class="nav-menu" id="sidebarNavMenu">
+            <li><a href="../index.html#home" class="nav-link">Home</a></li>
+            <li><a href="../index.html#general-info" class="nav-link">General Information</a></li>
+            <li><a href="../index.html#things-to-do" class="nav-link">Things to Do</a></li>
+            <li><a href="../index.html#history" class="nav-link">History</a></li>
+            <li><a href="../index.html#cottages" class="nav-link">The Cottages</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Pine Trees Decoration -->
+            <div style="position: absolute; left: 48%; transform: translateX(-50%); font-size: 1.5rem; opacity: 0.7; white-space: nowrap; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); pointer-events: none; letter-spacing: 8px;">
+                🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+            </div>
+            
+            <!-- Admin Controls -->
+            <div style="position: absolute; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 1001;">
+                <!-- Admin Toggle Button -->
+                <button id="adminToggleBtn" onclick="toggleAdminMode()" style="background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">&#128274; Admin Off</button>
+                
+                <!-- Admin Tools Dropdown -->
+                <div style="position: relative;">
+                    <button id="adminToolsBtn" onclick="toggleAdminDropdown()" style="display: none; background-color: #6f42c1; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">&#9881;&#65039; Admin Tools &#9662;</button>
+                    <div id="adminDropdown" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 5px; background: white; border: 2px solid #6f42c1; border-radius: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); min-width: 180px; z-index: 10000;">
+                        <button onclick="openAdminManager(); toggleAdminDropdown();" style="width: 100%; background: white; color: #333; border: none; padding: 12px 16px; text-align: left; cursor: pointer; font-size: 14px; border-bottom: 1px solid #eee; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">&#128296; Admin Manager</button>
+                        <button onclick="toggleMaintenanceMode(); toggleAdminDropdown();" id="maintenanceModeBtn" style="width: 100%; background: white; color: #333; border: none; padding: 12px 16px; text-align: left; cursor: pointer; font-size: 14px; border-radius: 0 0 5px 5px; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">&#128679; Maintenance Mode: <span id="maintenanceStatus">OFF</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+            <div class="cottage-detail-header">
+                <h1>The Shanty</h1>
+                <p class="cottage-tagline">Testimonials</p>
+            </div>
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link">Amenities</a>
+            </nav>
+            <div class="cottage-section">
+                <h2>Testimonials</h2>
+                <div id="averageRating" class="average-rating" style="display: none;">
+                    <div class="avg-rating-stars"></div>
+                    <div class="avg-rating-text"></div>
+                </div>
+                <div id="reviewsList" class="reviews-list">
+                    <!-- Reviews will be displayed here -->
+                </div>
+                <div class="section-placeholder" id="noReviews">
+                    <p>No reviews yet. Be the first to share your experience!</p>
+                </div>
+                <div class="booking-cta">
+                    <button onclick="toggleReviewForm()" class="btn btn-book-large">Add Review</button>
+                </div>
+                
+                <!-- Review Form (hidden by default) -->
+                <div id="reviewForm" class="review-form-container" style="display: none;">
+                    <h3>Submit Your Review</h3>
+                    <form class="review-form" onsubmit="submitReview(event, 'The Shanty')">
+                        
+                        <div class="form-group">
+                            <label for="reviewerName">Your Name *</label>
+                            <input type="text" id="reviewerName" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reviewerEmail">Your Email *</label>
+                            <input type="email" id="reviewerEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Rating *</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" title="5 stars">★</label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="4 stars">★</label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" title="3 stars">★</label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="2 stars">★</label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="1 star">★</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reviewText">Your Review (Optional)</label>
+                            <textarea id="reviewText" name="review" rows="5" placeholder="Share your experience with us..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-book-large">Submit Review</button>
+                            <button type="button" onclick="toggleReviewForm()" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </form>
+                    <div id="reviewSuccess" class="review-success" style="display: none;">
+                        <p>✓ Thank you for your review! Your feedback has been recorded.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Crystal Acres. All rights reserved.</p>
+            <p>278 Crystal Lake Rd, Gilmanton Iron Works, NH 03837</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Created by Riley Joseph Santor</p>
+        </div>
+    </footer>
+    <script src="../main.js"></script>
+</body>
+</html>

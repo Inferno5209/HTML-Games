@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Villa - Crystal Acres</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+<body>
+    <!-- Vertical Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <div class="sidebar-logo">
+            <img src="../icon.png" alt="Crystal Acres Logo">
+        </div>
+        <ul class="nav-menu" id="sidebarNavMenu">
+            <li><a href="../index.html#home" class="nav-link">Home</a></li>
+            <li><a href="../index.html#general-info" class="nav-link">General Information</a></li>
+            <li><a href="../index.html#things-to-do" class="nav-link">Things to Do</a></li>
+            <li><a href="../index.html#history" class="nav-link">History</a></li>
+            <li><a href="../index.html#cottages" class="nav-link">The Cottages</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Pine Trees Decoration -->
+            <div style="position: absolute; left: 48%; transform: translateX(-50%); font-size: 1.5rem; opacity: 0.7; white-space: nowrap; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); pointer-events: none; letter-spacing: 8px;">
+                🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+            </div>
+            
+            <!-- Admin Controls -->
+            <div style="position: absolute; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 1001;">
+                <!-- Admin Toggle Button -->
+                <button id="adminToggleBtn" onclick="toggleAdminMode()" style="background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">&#128274; Admin Off</button>
+                
+                <!-- Admin Tools Dropdown -->
+                <div style="position: relative;">
+                    <button id="adminToolsBtn" onclick="toggleAdminDropdown()" style="display: none; background-color: #6f42c1; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">&#9881;&#65039; Admin Tools &#9662;</button>
+                    <div id="adminDropdown" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 5px; background: white; border: 2px solid #6f42c1; border-radius: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); min-width: 180px; z-index: 10000;">
+                        <button onclick="openAdminManager(); toggleAdminDropdown();" style="width: 100%; background: white; color: #333; border: none; padding: 12px 16px; text-align: left; cursor: pointer; font-size: 14px; border-bottom: 1px solid #eee; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">&#128296; Admin Manager</button>
+                        <button onclick="toggleMaintenanceMode(); toggleAdminDropdown();" id="maintenanceModeBtn" style="width: 100%; background: white; color: #333; border: none; padding: 12px 16px; text-align: left; cursor: pointer; font-size: 14px; border-radius: 0 0 5px 5px; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='white'">&#128679; Maintenance Mode: <span id="maintenanceStatus">OFF</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cottage Detail Section -->
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+
+            <div class="cottage-detail-header">
+                <h1>The Villa</h1>
+                <p class="cottage-tagline">Modern Comfort Meets Lakeside Charm</p>
+                <div class="cottage-meta">
+                    <span class="meta-item"><strong>Sleeps:</strong> Up to 6 guests</span>
+                    <span class="meta-item"><strong>Bedrooms:</strong> 2</span>
+                    <span class="meta-item"><strong>Bathroom:</strong> Full tub & shower</span>
+                </div>
+            </div>
+
+            <!-- Sub-Section Navigation -->
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link active">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link">Amenities</a>
+            </nav>
+
+            <!-- Photos and Details Content -->
+            <div class="cottage-section">
+                <!-- Advanced Google Slide Embed -->
+                <div id="villaSlideContainer" style="position: relative; width: 100%; max-width: 900px; margin: 0 auto; aspect-ratio: 16/9; overflow: hidden; border-radius: 10px; background: #000; box-shadow: 0 5px 30px rgba(0,0,0,0.3);">
+                    <iframe id="villaSlideFrame" src="https://docs.google.com/presentation/d/e/2PACX-1vTjxqKBF-U4jXefsa5_sipYDe4jgCTvFrPtWxonnNAsaLYxtyztv7j2cvAo9TlPMIYpH95TLI2wQRG3/pubembed?slide=0&rm=minimal" style="width: 100%; height: 100%; border: none; pointer-events: none; display: block;"></iframe>
+                    <button style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); background: #ffffff; color: #000000; opacity: 0.8; font-size: 24px; padding: 14.4px 19.2px; cursor: pointer; border-radius: 8px; user-select: none; border: none; font-weight: bold; transition: all 0.2s;" onclick="prevVillaSlide()" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">◀</button>
+                    <button style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); background: #ffffff; color: #000000; opacity: 0.8; font-size: 24px; padding: 14.4px 19.2px; cursor: pointer; border-radius: 8px; user-select: none; border: none; font-weight: bold; transition: all 0.2s;" onclick="nextVillaSlide()" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">▶</button>
+                </div>
+
+                <script>
+                let currentVillaSlide = 0;
+                let villaBaseSrc = "https://docs.google.com/presentation/d/e/2PACX-1vTjxqKBF-U4jXefsa5_sipYDe4jgCTvFrPtWxonnNAsaLYxtyztv7j2cvAo9TlPMIYpH95TLI2wQRG3/pubembed";
+
+                function updateVillaFrame() {
+                    let src = villaBaseSrc + "?slide=" + currentVillaSlide + "&rm=minimal";
+                    document.getElementById("villaSlideFrame").src = src;
+                }
+
+                function nextVillaSlide() {
+                    currentVillaSlide++;
+                    updateVillaFrame();
+                }
+
+                function prevVillaSlide() {
+                    if (currentVillaSlide > 0) {
+                        currentVillaSlide--;
+                        updateVillaFrame();
+                    }
+                }
+                </script>
+
+                <div class="cottage-description">
+                    <h2>Highlights of the Villa</h2>
+                    <p>This cozy cottage has the best view of the lake and lots of convenient amenities. The Villa offers modern comfort with a perfect lakeside location, featuring a screened porch ideal for morning coffee or evening relaxation while enjoying stunning water views.</p>
+                    
+                    <p>Inside, you'll find a fully equipped kitchen with all the essentials for preparing meals, a comfortable living room with a fireplace for cozy evenings, and Internet TV for entertainment. The convenience of a washer and dryer makes extended stays effortless, while two well-appointed bedrooms provide restful accommodations for up to 6 guests.</p>
+                    
+                    <p>The Villa's prime location offers unobstructed views of Crystal Lake and the Belknap Mountain Range, making it the perfect retreat for families seeking both comfort and natural beauty. Wake up to breathtaking sunrises and end your days watching spectacular sunsets over the water.</p>
+                </div>
+            </div>
+
+            <div class="booking-cta">
+                <h2>Ready to Book The Villa?</h2>
+                <p>Experience the perfect blend of modern comfort and lakeside charm</p>
+                <a href="../reservations.html" class="btn btn-book-large">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Crystal Acres. All rights reserved.</p>
+            <p>278 Crystal Lake Rd, Gilmanton Iron Works, NH 03837</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Created by Riley Joseph Santor</p>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script>
+        // Load rates on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadRates();
+        });
+
+        function loadRates() {
+            const rates = JSON.parse(localStorage.getItem('villa-rates')) || {
+                weekly: 1495,
+                nightly: 214,
+                tax: 9,
+                cleaningFee: 75,
+                deposit: 250
+            };
+            
+            document.getElementById('weekly-rate-display').textContent = '$' + rates.weekly;
+            document.getElementById('nightly-rate-display').textContent = '$' + rates.nightly;
+            document.getElementById('tax-display').textContent = rates.tax;
+            document.getElementById('cleaning-fee-display').textContent = rates.cleaningFee;
+            document.getElementById('deposit-display').textContent = rates.deposit;
+            
+            document.getElementById('weekly-rate-input').value = rates.weekly;
+            document.getElementById('nightly-rate-input').value = rates.nightly;
+            document.getElementById('tax-input').value = rates.tax;
+            document.getElementById('cleaning-fee-input').value = rates.cleaningFee;
+            document.getElementById('deposit-input').value = rates.deposit;
+        }
+
+        function checkRatesAccess() {
+            if (!isAdminEnabled()) {
+                alert('⚠️ Admin mode is disabled. Please enable admin mode using the Admin toggle button.');
+                return;
+            }
+            
+            toggleEditRates();
+        }
+
+        function toggleEditRates() {
+            document.getElementById('rates-display').style.display = 'none';
+            document.getElementById('rates-edit-form').style.display = 'block';
+            document.getElementById('edit-rates-btn').style.display = 'none';
+            document.getElementById('save-rates-btn').style.display = 'inline-block';
+            document.getElementById('cancel-rates-btn').style.display = 'inline-block';
+        }
+
+        function cancelEdit() {
+            document.getElementById('rates-display').style.display = 'block';
+            document.getElementById('rates-edit-form').style.display = 'none';
+            document.getElementById('edit-rates-btn').style.display = 'inline-block';
+            document.getElementById('save-rates-btn').style.display = 'none';
+            document.getElementById('cancel-rates-btn').style.display = 'none';
+            loadRates(); // Reset to saved values
+        }
+
+        function saveRates() {
+            const rates = {
+                weekly: document.getElementById('weekly-rate-input').value,
+                nightly: document.getElementById('nightly-rate-input').value,
+                tax: document.getElementById('tax-input').value,
+                cleaningFee: document.getElementById('cleaning-fee-input').value,
+                deposit: document.getElementById('deposit-input').value
+            };
+            
+            localStorage.setItem('villa-rates', JSON.stringify(rates));
+            loadRates();
+            
+            document.getElementById('rates-display').style.display = 'block';
+            document.getElementById('rates-edit-form').style.display = 'none';
+            document.getElementById('edit-rates-btn').style.display = 'inline-block';
+            document.getElementById('save-rates-btn').style.display = 'none';
+            document.getElementById('cancel-rates-btn').style.display = 'none';
+            
+            alert('Rates updated successfully!');
+        }
+
+        // Update admin button visibility
+        function updateAdminButtons() {
+            const photoBtn = document.getElementById('photoManagerBtn');
+            const editRatesBtn = document.getElementById('edit-rates-btn');
+            if (isAdminEnabled()) {
+                if (photoBtn) photoBtn.style.display = 'block';
+                if (editRatesBtn) editRatesBtn.style.display = 'inline-block';
+            } else {
+                if (photoBtn) photoBtn.style.display = 'none';
+                if (editRatesBtn) editRatesBtn.style.display = 'none';
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateAdminButtons();
+        });
+
+        // Listen for admin mode changes from storage (other tabs)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'adminEnabledPages' || e.key === 'adminModeChangedTrigger') {
+                updateAdminButtons();
+            }
+        });
+        
+        // Listen for admin mode changes in same tab
+        window.addEventListener('adminModeChanged', function() {
+            updateAdminButtons();
+        });
+        
+        // Initialize photo persistence system on page load
+        if (typeof initPhotoStorage === 'function') {
+            initPhotoStorage();
+        }
+    </script>
+</body>
+</html>

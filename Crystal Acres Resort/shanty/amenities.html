@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shanty - Amenities - Crystal Acres</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+<body>
+    <!-- Vertical Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <div class="sidebar-logo">
+            <img src="../icon.png" alt="Crystal Acres Logo">
+        </div>
+        <ul class="nav-menu" id="sidebarNavMenu">
+            <li><a href="../index.html#home" class="nav-link">Home</a></li>
+            <li><a href="../index.html#general-info" class="nav-link">General Information</a></li>
+            <li><a href="../index.html#things-to-do" class="nav-link">Things to Do</a></li>
+            <li><a href="../index.html#history" class="nav-link">History</a></li>
+            <li><a href="../index.html#cottages" class="nav-link">The Cottages</a></li>
+            <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Edit Amenities Button -->
+            <button onclick="toggleAmenitiesEditor()" id="editAmenitiesBtn" style="display: none; position: absolute; left: 85px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4); transition: all 0.3s ease; z-index: 1001;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">✨</span>
+                    <span>Edit Amenities</span>
+                </span>
+            </button>
+            
+            <!-- Save Button -->
+            <button onclick="savePageContent()" id="savePageBtn" style="display: none; position: absolute; left: 20px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; border: none; padding: 11px 22px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 700; box-shadow: 0 4px 20px rgba(56, 239, 125, 0.5); transition: all 0.3s ease; z-index: 1001;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">💾</span>
+                    <span>Save</span>
+                </span>
+            </button>
+            
+            <!-- Cancel Button -->
+            <button onclick="cancelPageEdit()" id="cancelPageBtn" style="display: none; position: absolute; left: 150px; background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); color: white; border: none; padding: 11px 22px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 700; box-shadow: 0 4px 20px rgba(238, 9, 121, 0.5); transition: all 0.3s ease; z-index: 1001;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 18px;">✖</span>
+                    <span>Cancel</span>
+                </span>
+            </button>
+
+            <!-- Pine Trees Decoration -->
+            <div style="position: absolute; left: 48%; transform: translateX(-50%); font-size: 1.5rem; opacity: 0.7; white-space: nowrap; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); pointer-events: none; letter-spacing: 8px;">
+                🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲  🌲
+            </div>
+            
+            <!-- Admin Controls -->
+            <div style="position: absolute; right: 20px; display: flex; gap: 10px; align-items: center; z-index: 1001;">
+                <!-- Admin Toggle Button -->
+                <button id="adminToggleBtn" onclick="toggleAdminMode()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 1; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 18px;">🔒</span>
+                        <span>Admin</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+            <div class="cottage-detail-header">
+                <h1>The Shanty</h1>
+                <p class="cottage-tagline">Amenities</p>
+            </div>
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link active">Amenities</a>
+            </nav>
+            <div class="cottage-section">
+                <div class="admin-actions" id="amenitiesAdminActions" style="display: none;">
+                    <button onclick="toggleEditMode()" id="editModeBtn" class="btn-admin-edit">✏️ Edit Amenities</button>
+                    <button onclick="saveAmenities()" id="saveBtn" class="btn-save" style="display: none;">💾 Save Changes</button>
+                    <button onclick="cancelEdit()" id="cancelBtn" class="btn-cancel" style="display: none;">✖ Cancel</button>
+                </div>
+                <div class="amenities-grid" id="amenitiesContainer">
+                    <div class="amenity-category">
+                        <h3>Property Type</h3>
+                        <p>Cottage</p>
+                        <p class="amenity-detail">Housekeeping cottage. Guests provide own meals and maintain a clean cottage during stay. Checkout cleaning service included in rent. Towels and linens not provided and are available to rent.</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Size</h3>
+                        <p>approx. 550 sq. ft.</p>
+                        <p class="amenity-detail">1 story</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Suitability</h3>
+                        <p>Families and children welcome</p>
+                        <p>Groups</p>
+                        <p>Pets welcome</p>
+                        <p class="amenity-detail">$150 extra for each, please inform us at time of reservation</p>
+                        <p>Not wheelchair accessible</p>
+                        <p>Non-smoking only</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Kitchen</h3>
+                        <p>Full kitchen</p>
+                        <p class="amenity-detail">Oven, 4-burner stove, dishes, eating and cooking utensils, refrigerator, freezer, coffee maker, microwave, toaster, paper towels</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Dining</h3>
+                        <p>Dining Area</p>
+                        <p class="amenity-detail">Seating for 6 people</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Living Room</h3>
+                        <p>Comfortable seating area</p>
+                        <p class="amenity-detail">Couch/futon, 2 chairs, TV and fireplace with free firewood</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Bathroom</h3>
+                        <p>1 Bathroom</p>
+                        <p class="amenity-detail">Toilet, shower, complementary basket with guest sized shampoo, conditioner, hand soap and body lotion, toilet paper provided</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Bedrooms</h3>
+                        <p>2 Bedrooms, Sleeps 6</p>
+                        <p class="amenity-detail">Bedroom 1 has 1 full size bed<br>Bedroom 2 has 2 twin/single beds</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Entertainment</h3>
+                        <p class="amenity-detail">Games, Books, Radio in the cottage.</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Internet</h3>
+                        <p>Free wireless internet</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Heating</h3>
+                        <p>Fireplace</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>General items in cottage</h3>
+                        <p class="amenity-detail">Maps and information about local attractions, alarm clock</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Screen Porch / Veranda</h3>
+                        <p>Furnished front porch</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Outside</h3>
+                        <p>Outdoor Grill Gas</p>
+                        <p>Yard</p>
+                        <p>Outdoor seating with provided lawn furniture</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Parking</h3>
+                        <p>2 cars</p>
+                    </div>
+
+                    <div class="amenity-category full-width">
+                        <h3>Crystal Acres features shared by all guests</h3>
+                        <div class="shared-features">
+                            <div class="feature-item">
+                                <strong>Lake</strong>
+                                <p>Crystal Lake is 441 acres and extremely clean. The water is tested 3 times a year with high clarity ratings.</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>Beach</strong>
+                                <p>We have 200 feet of natural beach front. Our cottages are 150' to 250' away from the lake but it is a very short walk down the driveway and across the lawn to the beach.</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>Waterfront</strong>
+                                <p>Waterfront area includes beach, piers and swimming raft. There is yard space adjacent to waterfront for setting up lawn games. There are no streets to cross.</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>Mountain view</strong>
+                                <p>View the whole Belknap Mountain Range from the beach and waterfront.</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>Rural setting</strong>
+                                <p>Crystal Acres is on a treed lot with a mixture of sun and shade. There are no streets to cross to use all our facilities and it's a wonderfully safe environment for children. There is lots of play space. A parent should always be at the beach with them since there is no lifeguard.</p>
+                            </div>
+                            <div class="feature-item">
+                                <strong>Yard and play areas</strong>
+                                <p>Picnic tables, outdoor fire pit, shuffleboard, yard games</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="amenity-category full-width">
+                        <h3>Nearby attractions and amenities</h3>
+                        <div class="shared-features">
+                            <div class="feature-item">
+                                <strong>The Village of Gilmanton Iron Works</strong>
+                                <p>The quaint village of Gilmanton Iron Works includes a store, post office, church, library, fire station and lots of history. Just 5 minutes away by car. Full size grocery stores are 20-30 minutes away by car.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="amenity-category full-width">
+                        <h3>Attraction & Activities</h3>
+                        <p class="amenity-detail">Antiquing, bird watching, boating, cinemas, duty free shops, live theater, outlet shopping, photography, playground, restaurants, scenic drives, sight seeing, theme parks, walking, water parks</p>
+                    </div>
+
+                    <div class="amenity-category full-width">
+                        <h3>Local Services & Businesses</h3>
+                        <p class="amenity-detail">Groceries, medical services, laundromat, hospital, massage therapist, ATM/bank, fitness center, library, coin laundry, churches & synagogues</p>
+                    </div>
+
+                    <div class="amenity-category full-width">
+                        <h3>Sports & Adventure Activities</h3>
+                        <p class="amenity-detail">Cycling, fishing, fly fishing, freshwater fishing, golf, golf privileges optional, hiking, hunting big game, mountain climbing, mountaineering, pier fishing, roller blading, swimming</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Crystal Acres. All rights reserved.</p>
+            <p>278 Crystal Lake Rd, Gilmanton Iron Works, NH 03837</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Created by Riley Joseph Santor</p>
+        </div>
+    </footer>
+    
+    <!-- Amenities Editor Modal -->
+    <div id="amenitiesEditorModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2>Edit Amenities - The Shanty</h2>
+                <button onclick="closeAmenitiesEditor()" class="btn-close-modal">&times;</button>
+            </div>
+            <div class="admin-modal-body">
+                <p class="admin-note">💡 Edit the amenities content below. Each section has editable fields for the title and content.</p>
+                <div id="amenitiesEditorContent"></div>
+            </div>
+            <div class="admin-modal-footer">
+                <button onclick="saveAmenities()" class="btn btn-book-large">Save Changes</button>
+                <button onclick="closeAmenitiesEditor()" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../main.js"></script>
+</body>
+</html>
+        const STORAGE_KEY = `${COTTAGE_NAME}-amenities`;
+
+        window.addEventListener('DOMContentLoaded', function() {
+            updateAdminActionsVisibility();
+            loadSavedAmenities();
+        });
+
+        setInterval(updateAdminActionsVisibility, 1000);
+
+        function updateAdminActionsVisibility() {
+            const adminActions = document.getElementById('amenitiesAdminActions');
+            if (adminActions && window.isAdminEnabled) {
+                adminActions.style.display = window.isAdminEnabled() ? 'block' : 'none';
+            }
+        }
+
+        function openAmenitiesEditor() {
+            if (!window.isAdminEnabled || !window.isAdminEnabled()) {
+                alert('⚠️ Admin mode is disabled. Please enable admin mode first.');
+                return;
+            }
+
+            const modal = document.getElementById('amenitiesEditorModal');
+            const editorContent = document.getElementById('amenitiesEditorContent');
+            const categories = document.querySelectorAll('.amenity-category');
+            let editorHTML = '';
+            
+            categories.forEach((category, index) => {
+                const heading = category.querySelector('h3');
+                const title = heading ? heading.textContent : '';
+                const isFullWidth = category.classList.contains('full-width');
+                const paragraphs = Array.from(category.querySelectorAll('p'));
+                const content = paragraphs.map(p => {
+                    if (p.classList.contains('amenity-detail')) {
+                        return `<detail>${p.innerHTML}</detail>`;
+                    }
+                    return `<item>${p.textContent}</item>`;
+                }).join('\n');
+                
+                editorHTML += `
+                    <div class="editor-section">
+                        <div class="editor-field">
+                            <label><strong>Category ${index + 1} Title:</strong></label>
+                            <input type="text" class="category-title" data-index="${index}" value="${title}" style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="editor-field">
+                            <label><strong>Content:</strong> <small>(Use &lt;item&gt; for regular items, &lt;detail&gt; for detailed descriptions)</small></label>
+                            <textarea class="category-content" data-index="${index}" rows="6" style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; font-family: monospace;">${content}</textarea>
+                        </div>
+                        <div class="editor-field">
+                            <label>
+                                <input type="checkbox" class="category-fullwidth" data-index="${index}" ${isFullWidth ? 'checked' : ''}>
+                                Full Width Section
+                            </label>
+                        </div>
+                        <hr style="margin: 20px 0; border: none; border-top: 2px solid #e0e0e0;">
+                    </div>
+                `;
+            });
+            
+            editorContent.innerHTML = editorHTML;
+            modal.style.display = 'flex';
+        }
+
+        function closeAmenitiesEditor() {
+            document.getElementById('amenitiesEditorModal').style.display = 'none';
+        }
+
+        function saveAmenities() {
+            const categories = [];
+            const titleInputs = document.querySelectorAll('.category-title');
+            
+            titleInputs.forEach(input => {
+                const index = input.dataset.index;
+                const title = input.value;
+                const contentTextarea = document.querySelector(`.category-content[data-index="${index}"]`);
+                const fullWidthCheckbox = document.querySelector(`.category-fullwidth[data-index="${index}"]`);
+                const content = contentTextarea ? contentTextarea.value : '';
+                const isFullWidth = fullWidthCheckbox ? fullWidthCheckbox.checked : false;
+                
+                categories.push({ title, content, fullWidth: isFullWidth });
+            });
+            
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(categories));
+            applyAmenities(categories);
+            closeAmenitiesEditor();
+            alert('Amenities saved successfully!');
+        }
+
+        function loadSavedAmenities() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                applyAmenities(JSON.parse(saved));
+            }
+        }
+
+        function applyAmenities(categories) {
+            const container = document.getElementById('amenitiesContainer');
+            let html = '';
+            categories.forEach(cat => {
+                const fullWidthClass = cat.fullWidth ? ' full-width' : '';
+                let contentHTML = '';
+                const lines = cat.content.split('\n').filter(line => line.trim());
+                lines.forEach(line => {
+                    if (line.includes('<detail>')) {
+                        contentHTML += `<p class="amenity-detail">${line.replace(/<\/?detail>/g, '')}</p>\n`;
+                    } else if (line.includes('<item>')) {
+                        contentHTML += `<p>${line.replace(/<\/?item>/g, '')}</p>\n`;
+                    } else {
+                        contentHTML += `<p>${line}</p>\n`;
+                    }
+                });
+                html += `<div class="amenity-category${fullWidthClass}"><h3>${cat.title}</h3>${contentHTML}</div>`;
+            });
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
