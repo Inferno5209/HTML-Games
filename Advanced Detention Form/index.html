@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Detention Form</title>
+  <link rel="icon" type="image/png" href="WTDI.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      padding: 0;
+      margin: 0;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* Navigation Bar Styles */
+    .navbar {
+      background: linear-gradient(135deg, #2c5364, #203a43);
+      padding: 15px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Main Content Wrapper */
+    .main-content {
+      padding: 25px;
+      display: flex;
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      flex: 1;
+      max-width: 680px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    .hint-box {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 15px;
+      padding: 25px;
+      width: 300px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      animation: fadeIn 0.7s ease-in-out;
+      position: sticky;
+      top: 100px;
+    }
+
+    .hint-box h3 {
+      color: #856404;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hint-box p {
+      color: #856404;
+      line-height: 1.6;
+      margin: 10px 0;
+      font-size: 14.5px;
+    }
+
+    .hint-box .step {
+      background: rgba(255,193,7,0.15);
+      padding: 12px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border-left: 3px solid #ffc107;
+    }
+
+    .hint-box .step strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 17px;
+      color: #2c5364;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    fieldset {
+      border: none;
+      margin-bottom: 17px;
+      padding: 0;
+    }
+
+    legend {
+      font-size: 17px;
+      font-weight: bold;
+      color: #203a43;
+      margin-bottom: 11px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      color: #444;
+      font-size: 14.5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 9px;
+      border: 1px solid #ccc;
+      font-size: 14.5px;
+      transition: 0.3s ease;
+      margin-bottom: 14px;
+      box-sizing: border-box;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #2c5364;
+      outline: none;
+      box-shadow: 0 0 6px rgba(44,83,100,0.35);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 75px;
+    }
+
+    /* Flexbox row for paired fields */
+    .row {
+      display: flex;
+      gap: 18px;
+    }
+    .row .field {
+      flex: 1;
+    }
+
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #2c5364, #203a43);
+      color: white;
+      font-size: 15.5px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #203a43, #0f2027);
+      transform: scale(1.02);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-menu {
+        gap: 15px;
+      }
+
+      .main-content {
+        padding: 20px 15px;
+        flex-direction: column;
+      }
+
+      .hint-box {
+        width: 100%;
+        position: static;
+      }
+
+      .form-container {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        📋 Detention System
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Detention Form</a></li>
+        <li><a href="display.html" class="nav-link">View Data</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+  <div class="form-container">
+  <h2>Detention Incident Form</h2>
+  
+  
+  <form id="detentionForm">
+    <!-- Section 1: Teacher Information -->
+    <fieldset>
+      <legend>👨‍🏫 Teacher Information</legend>
+      
+      <div class="row">
+        <div class="field">
+          <label>Teacher Email:</label>
+          <input type="email" name="teacherEmail" id="teacherEmail" placeholder="firstname.lastname@cttech.org" required>
+        </div>
+        <div class="field">
+          <label>Teacher Name:</label>
+          <input type="text" name="teacherName" id="teacherName" placeholder="Auto-filled from email" required>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Section 2: Student Information -->
+    <fieldset>
+      <legend>👤 Student Information</legend>
+      
+      <div class="row">
+        <div class="field">
+          <label>Student Name:</label>
+          <input type="text" name="studentName" placeholder="Enter student name" required>
+        </div>
+        <div class="field">
+          <label>Student ID#:</label>
+          <input type="text" name="studentId" placeholder="Enter student ID" required>
+        </div>
+      </div>
+      
+      <label>Grade:</label>
+      <select name="grade" required>
+        <option value="">Select grade</option>
+        <option value="Freshman">Freshman</option>
+        <option value="Sophomore">Sophomore</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+    </fieldset>
+
+    <!-- Section 3: Incident Details -->
+    <fieldset>
+      <legend>⚠️ Incident Details</legend>
+      
+      <div class="row">
+        <div class="field">
+          <label>Main Type:</label>
+          <select name="mainType" id="mainType" required style="display:block;">
+            <option value="">Select main type</option>
+            <option value="Behavioral">Behavioral</option>
+            <option value="Academic">Academic</option>
+            <option value="Attendance">Attendance</option>
+            <option value="Technology">Technology</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="text" name="mainTypeOther" id="mainTypeOther" placeholder="Please specify main type..." style="display:none;">
+        </div>
+        <div class="field">
+          <label>Sub Type:</label>
+          <select name="subType" id="subType" style="display:block;">
+            <option value="">Select main type first</option>
+          </select>
+          <input type="text" name="subTypeOther" id="subTypeOther" placeholder="Please specify..." style="display:none;">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Period:</label>
+          <select name="period">
+            <option value="">Select period</option>
+            <option value="1">Period 1</option>
+            <option value="2">Period 2</option>
+            <option value="3">Period 3</option>
+            <option value="4">Period 4</option>
+            <option value="5">Period 5</option>
+            <option value="6">Period 6</option>
+            <option value="7">Period 7</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Location:</label>
+          <select name="location" id="location" style="display:block;">
+            <option value="">Select location</option>
+            <option value="Classroom">Classroom</option>
+            <option value="Hallway">Hallway</option>
+            <option value="Cafeteria">Cafeteria</option>
+            <option value="Gym">Gym</option>
+            <option value="Library">Library</option>
+            <option value="Trade">Trade</option>
+            <option value="TLH">TLH</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="text" name="locationOther" id="locationOther" placeholder="Please specify location..." style="display:none;">
+        </div>
+      </div>
+
+      <label>Incident Date:</label>
+      <input type="date" name="incidentDate" required>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+    <div id="submitMessage" style="margin-top: 15px; padding: 12px; border-radius: 8px; text-align: center; display: none; font-weight: 500;"></div>
+  </form>
+  </div>
+
+  <!-- Teacher Hint Box -->
+  <div class="hint-box">
+    <h3>💡 Important Reminder</h3>
+    <div class="step">
+      <strong>After submitting this form:</strong>
+      <p>Navigate to the <strong>View Data</strong> page to access the datasheet and send the detention email to the student and their parents.</p>
+    </div>
+    <div class="step">
+      <strong>Steps:</strong>
+      <p>1. Click "View Data" in the navigation menu<br>
+      2. Find your submitted detention entry<br>
+      3. Click the "Send Email" button to notify the student and parents</p>
+    </div>
+  </div>
+  </div> <!-- End main-content -->
+
+  <script>
+    
+    
+    // Auto-fill teacher name from email
+    const teacherEmailInput = document.getElementById("teacherEmail");
+    const teacherNameInput = document.getElementById("teacherName");
+
+    teacherEmailInput.addEventListener("input", function() {
+      const email = this.value.trim().toLowerCase();
+      
+      // Check if email matches the pattern firstname.lastname@cttech.org
+      const emailPattern = /^([a-z]+)\.([a-z]+)@cttech\.org$/i;
+      const match = email.match(emailPattern);
+      
+      if (match) {
+        // Extract first and last name from email
+        const firstName = match[1].charAt(0).toUpperCase() + match[1].slice(1);
+        const lastName = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+        
+        // Fill in the name field with space between names
+        teacherNameInput.value = firstName + " " + lastName;
+      }
+    });
+
+    // Dynamic sub-type options based on main type
+    const subTypeOptions = {
+      "Behavioral": [
+        "Disruption",
+        "Disrespect",
+        "Dress Code",
+        "Fighting",
+        "Profanity",
+        "Other"
+      ],
+      "Academic": [
+        "Late Assignment",
+        "Missing Work",
+        "Cheating",
+        "Not Prepared",
+        "Off Task",
+        "Other"
+      ],
+      "Attendance": [
+        "Tardy",
+        "Unexcused Absence",
+        "Skipping Class",
+        "Left Without Permission",
+        "Out of Bounds",
+        "Other"
+      ],
+      "Technology": [
+        "Phone Usage",
+        "Inappropriate Use",
+        "Unauthorized Access",
+        "Cyberbullying",
+        "Gaming",
+        "Deliberate damage",
+        "Other"
+      ],
+      "Other": [
+        "Other"
+      ]
+    };
+
+    // Update sub-type dropdown when main type changes
+    const mainTypeSelect = document.getElementById("mainType");
+    const mainTypeOther = document.getElementById("mainTypeOther");
+    const subTypeSelect = document.getElementById("subType");
+    const subTypeOther = document.getElementById("subTypeOther");
+
+    mainTypeSelect.addEventListener("change", function() {
+      const selectedMainType = this.value;
+      
+      // Handle "Other" selection for main type
+      if (selectedMainType === "Other") {
+        mainTypeSelect.style.display = "none";
+        mainTypeOther.style.display = "block";
+        mainTypeOther.required = true;
+        mainTypeOther.focus();
+        
+        // Show sub-type text box when main type is Other
+        subTypeSelect.style.display = "none";
+        subTypeOther.style.display = "block";
+        subTypeSelect.required = false;
+        subTypeOther.required = true;
+        subTypeOther.value = "";
+        return;
+      }
+      
+      // Reset visibility
+      subTypeSelect.style.display = "block";
+      subTypeOther.style.display = "none";
+      subTypeOther.value = "";
+      
+      // Clear existing options
+      subTypeSelect.innerHTML = '<option value="">Select sub type</option>';
+      
+      // Populate new options based on main type
+      if (selectedMainType && subTypeOptions[selectedMainType]) {
+        subTypeOptions[selectedMainType].forEach(function(subType) {
+          const option = document.createElement("option");
+          option.value = subType;
+          option.textContent = subType;
+          subTypeSelect.appendChild(option);
+        });
+      } else {
+        subTypeSelect.innerHTML = '<option value="">Select main type first</option>';
+      }
+    });
+    
+    // Allow going back to dropdown if main type text box is cleared
+    mainTypeOther.addEventListener("blur", function() {
+      if (!this.value.trim()) {
+        mainTypeSelect.style.display = "block";
+        mainTypeOther.style.display = "none";
+        mainTypeOther.required = false;
+        mainTypeSelect.value = "";
+        
+        // Reset sub-type visibility
+        subTypeSelect.style.display = "block";
+        subTypeSelect.innerHTML = '<option value="">Select main type first</option>';
+      }
+    });
+    
+    // Show text box when "Other" is selected for sub type
+    subTypeSelect.addEventListener("change", function() {
+      if (this.value === "Other") {
+        subTypeSelect.style.display = "none";
+        subTypeOther.style.display = "block";
+        subTypeOther.required = true;
+        subTypeOther.focus();
+      }
+    });
+    
+    // Allow going back to dropdown if text box is cleared
+    subTypeOther.addEventListener("blur", function() {
+      if (!this.value.trim()) {
+        subTypeSelect.style.display = "block";
+        subTypeOther.style.display = "none";
+        subTypeOther.required = false;
+        subTypeSelect.value = "";
+      }
+    });
+    
+    // Handle location "Other" selection
+    const locationSelect = document.getElementById("location");
+    const locationOther = document.getElementById("locationOther");
+    
+    locationSelect.addEventListener("change", function() {
+      if (this.value === "Other") {
+        locationSelect.style.display = "none";
+        locationOther.style.display = "block";
+        locationOther.required = true;
+        locationOther.focus();
+      }
+    });
+    
+    // Allow going back to dropdown if text box is cleared
+    locationOther.addEventListener("blur", function() {
+      if (!this.value.trim()) {
+        locationSelect.style.display = "block";
+        locationOther.style.display = "none";
+        locationOther.required = false;
+        locationSelect.value = "";
+      }
+    });
+
+    // Form submission
+    const form = document.getElementById("detentionForm");
+    const submitMessage = document.getElementById("submitMessage");
+    
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Handle "Other" text inputs
+      if (mainTypeOther.style.display !== "none" && mainTypeOther.value.trim()) {
+        data.mainType = mainTypeOther.value.trim();
+      }
+      if (subTypeOther.style.display !== "none" && subTypeOther.value.trim()) {
+        data.subType = subTypeOther.value.trim();
+      }
+      if (locationOther.style.display !== "none" && locationOther.value.trim()) {
+        data.location = locationOther.value.trim();
+      }
+      
+      
+
+      // Send data without waiting for response (faster)
+      fetch("https://script.google.com/macros/s/AKfycbwVcV4KY2JXZ0G-M02itZhXyPN7bGFK-S3eESf6TGZjI4sJsZ4NHfsXhKCJY-hCtC1eGQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(data),
+      });
+
+      // Show success message immediately
+      submitMessage.textContent = "✓ Form submitted successfully!";
+      submitMessage.style.display = "block";
+      submitMessage.style.background = "#d4edda";
+      submitMessage.style.color = "#155724";
+      submitMessage.style.border = "1px solid #c3e6cb";
+      
+      form.reset();
+      
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        submitMessage.style.display = "none";
+      }, 5000);
+    });
+  </script>
+  </div> <!-- End main-content -->
+  <footer style="text-align: center; padding: 19px; color: white; font-size: 16px; background: rgba(0,0,0,0.2);">
+    Created by Riley Joseph Santor
+  </footer>
+</body>
+</html>
