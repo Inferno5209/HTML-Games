@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Camp - Amenities - Crystal Acres</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Hamburger Button -->
+            <div class="hamburger-btn" onclick="toggleHamburgerMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <a href="../index.html" onclick="toggleHamburgerMenu(false)">Home</a>
+                <a href="../index.html#general-info" onclick="toggleHamburgerMenu(false)">General Information</a>
+                <a href="../index.html#things-to-do" onclick="toggleHamburgerMenu(false)">Things to Do</a>
+                <a href="../index.html#history" onclick="toggleHamburgerMenu(false)">History</a>
+                <a href="../index.html#cottages" onclick="toggleHamburgerMenu(false)">The Cottages</a>
+                <a href="../index.html#contact" onclick="toggleHamburgerMenu(false)">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+            <div class="cottage-detail-header">
+                <h1>The Brown Camp</h1>
+                <p class="cottage-tagline">Amenities</p>
+            </div>
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link active">Amenities</a>
+            </nav>
+            <div class="cottage-section">
+                <div class="amenities-grid" id="amenitiesContainer">
+                    <div class="amenity-category">
+                        <h3>Property Type</h3>
+                        <p>Cottage</p>
+                        <p class="amenity-detail">Housekeeping cottage. Guests provide own meals and maintain a clean
+                            cottage during stay. Checkout cleaning service included in rent. Towels and linens not
+                            provided and are available to rent.</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Size</h3>
+                        <p>approx. 800 sq. ft.</p>
+                        <p class="amenity-detail">1 story</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Suitability</h3>
+                        <p>Families and children welcome</p>
+                        <p>Groups</p>
+                        <p>Pets welcome</p>
+                        <p class="amenity-detail">$150 extra for each, please inform us at time of reservation</p>
+                        <p>Not wheelchair accessible</p>
+                        <p>Non-smoking only</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Kitchen</h3>
+                        <p>Full kitchen</p>
+                        <p class="amenity-detail">Oven, 4-burner stove, dishes, eating and cooking utensils,
+                            refrigerator, freezer, coffee maker, microwave, toaster, paper towels</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Dining</h3>
+                        <p>Dining Area</p>
+                        <p class="amenity-detail">Seating for 6 people</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Living Room</h3>
+                        <p>Comfortable seating area</p>
+                        <p class="amenity-detail">Couch/futon, 2 chairs, TV and fireplace with free firewood</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Bathroom</h3>
+                        <p>1 Bathroom</p>
+                        <p class="amenity-detail">Toilet, shower, complementary basket with guest sized shampoo,
+                            conditioner, hand soap and body lotion, toilet paper provided</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Bedrooms</h3>
+                        <p>3 Bedrooms, Sleeps 7</p>
+                        <p class="amenity-detail">Bedroom 1 has 1 queen bed<br>Bedroom 2 has 1 twin bed<br>Bedroom 3 has
+                            2 twin/single beds, twins will be converted to King on request</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Entertainment</h3>
+                        <p class="amenity-detail">Games, Books, Radio in the cottage.</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Internet</h3>
+                        <p>Free wireless internet</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Heating</h3>
+                        <p>2 Rannai heaters, Fireplace</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>General items in cottage</h3>
+                        <p class="amenity-detail">Maps and information about local attractions, alarm clock</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Screen Porch / Veranda</h3>
+                        <p>Furnished front porch/veranda</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Outside</h3>
+                        <p>Outdoor Grill Gas</p>
+                        <p>Yard</p>
+                        <p>Outdoor seating with provided lawn furniture</p>
+                    </div>
+
+                    <div class="amenity-category">
+                        <h3>Parking</h3>
+                        <p>3 cars</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Crystal Acres. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../cottage-nav.js"></script>
+</body>
+
+</html>
