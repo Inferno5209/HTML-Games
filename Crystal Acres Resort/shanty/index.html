@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shanty - Crystal Acres</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Hamburger Button -->
+            <div class="hamburger-btn" onclick="toggleHamburgerMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <a href="../index.html" onclick="toggleHamburgerMenu(false)">Home</a>
+                <a href="../index.html#general-info" onclick="toggleHamburgerMenu(false)">General Information</a>
+                <a href="../index.html#things-to-do" onclick="toggleHamburgerMenu(false)">Things to Do</a>
+                <a href="../index.html#history" onclick="toggleHamburgerMenu(false)">History</a>
+                <a href="../index.html#cottages" onclick="toggleHamburgerMenu(false)">The Cottages</a>
+                <a href="../index.html#contact" onclick="toggleHamburgerMenu(false)">Contact</a>
+            </div>
+
+            <button class="hamburger-btn" aria-label="Toggle navigation">
+                ☰
+            </button>
+
+
+        </div>
+    </nav>
+
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+
+            <div class="cottage-detail-header">
+                <h1>The Shanty</h1>
+                <p class="cottage-tagline">Historic Charm Since the 1930s</p>
+            </div>
+
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link active">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link">Amenities</a>
+            </nav>
+
+            <div class="cottage-section">
+                <!-- Gallery Placeholder -->
+                <div class="section-placeholder">
+                    <h3>Gallery Preview</h3>
+                    <p>Images coming soon...</p>
+                </div>
+
+                <div class="cottage-description">
+                    <h2>About The Shanty</h2>
+                    <p>Set back from the others, the Shanty is a cute, rustic getaway and a family favorite with an
+                        inviting porch for eating or relaxing. This charming cottage offers a more private, secluded
+                        setting while still being just steps away from the lake and beach.</p>
+
+                    <p>The Shanty features screened porches that provide wonderful spaces to enjoy the outdoors while
+                        protected from bugsperfect for morning breakfast, afternoon reading, or evening card games.
+                        Inside, you'll find a cozy fireplace that creates the quintessential cabin atmosphere,
+                        especially wonderful during cooler spring and fall evenings.</p>
+
+                    <p>With two comfortable bedrooms sleeping up to 6 guests, The Shanty strikes the perfect balance
+                        between intimate and spacious. Its slightly set-back location offers a sense of peaceful
+                        retreat, making it ideal for families who want a quiet escape while still having easy access to
+                        all the lakefront activities. The rustic charm and comfortable amenities make The Shanty a
+                        perennial favorite among returning guests.</p>
+                </div>
+            </div>
+
+            <div class="booking-cta">
+                <h2>Ready to Book Your Stay?</h2>
+                <p>Experience the historic charm of The Shanty.</p>
+                <a href="../reservations.html" class="btn-book-large">Request Booking</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p id="footerCopyright">&copy; 2025 Crystal Acres. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Created by Riley Joseph Santor</p>
+        </div>
+    </footer>
+
+
+    <script src="../cottage-nav.js"></script>
+</body>
+
+</html>
