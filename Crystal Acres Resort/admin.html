@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Acres Admin</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Admin SPA Styles */
+        :root {
+            --sidebar-width: 250px;
+            --admin-bg: #f4f6f8;
+            --sidebar-bg: #1a202c;
+            --sidebar-text: #a0aec0;
+            --sidebar-active: #fff;
+            --primary-accent: #2b6cb0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--admin-bg);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: #2d3748;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background-color: #2d3748;
+            color: var(--sidebar-active);
+            border-left-color: var(--primary-accent);
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        .back-link {
+            padding: 15px 20px;
+            color: #bd2130;
+            text-decoration: none;
+            border-top: 1px solid #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: #ff6b6b;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .view-section {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards & Forms */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #38a169;
+            color: white;
+        }
+
+        /* Admin List */
+        .admin-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Status Toast */
+        #statusMessage {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .status-success {
+            background-color: #38a169;
+        }
+
+        .status-error {
+            background-color: #e53e3e;
+        }
+
+        .status-info {
+            background-color: #3182ce;
+        }
+
+        /* Editor Styles */
+        .editor-group {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .editor-label {
+            font-size: 0.85rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .credential-row {
+            margin-bottom: 15px;
+        }
+
+        .credential-label {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 4px;
+        }
+
+        .credential-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+</style>
+</head>
+
+<body>
+    <!-- Login Overlay -->
+    <div id="loginOverlay"
+        style="position: fixed; inset: 0; background: #1a202c; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+        <div class="card" style="width: 350px; text-align: center;">
+            <h2 style="margin-bottom: 20px;">Crystal Admin Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <input type="email" id="loginEmail" placeholder="Email Address" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <div id="loginError" style="color: #e53e3e; margin-bottom: 10px; font-size: 0.9rem; display: none;">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Crystal Admin</h2>
+            <div id="currentUserProfile"
+                style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #2d3748; display: none;">
+                <div style="font-size: 0.9rem; color: #a0aec0;">Logged in as:</div>
+                <div id="sidebarName" style="color: white; font-weight: 600; margin-top: 2px;"></div>
+                <div id="sidebarRole"
+                    style="display: inline-block; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-top: 5px; font-weight: bold;">
+                </div>
+            </div>
+        </div>
+        <div class="nav-item active" onclick="switchView('dashboard')">Dashboards & Admins</div>
+        <div class="nav-item" onclick="switchView('editor')">Website Content Editor</div>
+        <div class="nav-spacer"></div>
+        <div class="nav-item" style="color: #e53e3e; margin-top: auto;" onclick="initializeDB()">⚠ Initialize Database
+        </div>
+        <div class="nav-item" onclick="logout()">Sign Out</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="statusMessage"></div>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboardView" class="view-section active">
+            <div class="card">
+                <h2>Manage Administrators</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="color: #718096; margin: 0;">Authorized users who can access this panel.</p>
+                    <button class="btn-primary" onclick="refreshAdmins()">Refresh List</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Add Admin -->
+                <div class="card">
+                    <h3>Add New Admin</h3>
+                    <form id="addAdminForm">
+                        <label>Full Name</label>
+                        <input type="text" id="addName" required placeholder="John Doe">
+                        <label>Email Address</label>
+                        <input type="email" id="addEmail" required placeholder="name@example.com">
+                        <label>Password</label>
+                        <input type="text" id="addPassword" required placeholder="Choose a secure password">
+                        <button type="submit" class="btn-success" style="width: 100%">Grant Access</button>
+                    </form>
+                </div>
+
+                <!-- Admin List -->
+                <div class="card">
+                    <h3>Current Admins</h3>
+                    <div id="loadingAdmins" style="color: #718096; display: none;">Fetching data...</div>
+                    <div id="adminList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credential Modal -->
+        <div id="credModal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 style="margin-top: 0;">Admin Credentials</h3>
+                <div class="credential-row">
+                    <div class="credential-label">Name</div>
+                    <div class="credential-value" id="modalName"></div>
+                </div>
+                <div class="credential-row">
+                    <div class="credential-label">Email</div>
+                    <div class="credential-value" id="modalEmail"></div>
+                </div>
+                <div class="credential-row">
+                    <div class="credential-label">Password</div>
+                    <div class="credential-value" id="modalPassword" style="color: #e53e3e;"></div>
+                </div>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button class="btn-primary" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDITOR VIEW -->
+        <div id="editorView" class="view-section">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <h2 style="margin: 0;">Content Editor</h2>
+                        <p style="color: #718096; margin: 5px 0 0;">Edit text content across the website.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <label
+                            style="font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 5px; text-align: left;">Editing
+                            Page:</label>
+                        <select id="pageSelector" class="header-select" onchange="loadContent()">
+                            <option value="home">Home Page</option>
+                            <option value="villa">The Villa</option>
+                            <option value="browncamp">Brown Camp</option>
+                            <option value="bunkhouse">Bunkhouse</option>
+                            <option value="shanty">The Shanty</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="editorLoading" style="text-align: center; color: #718096; padding: 40px; display: none;">
+                    Loading content from Google Sheet...
+                </div>
+
+                <div id="editorFields">
+                    <div
+                        style="text-align: center; padding: 40px; color: #a0aec0; border: 2px dashed #e2e8f0; border-radius: 8px;">
+                        Select a page to begin editing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyVrdeSdng-G-07-qvFwZ-la1P8S5p5P2iOZYdtyiELgmreMqNGf-aq3xWAezjRanU/exec";
+
+        // STATE
+        let siteContent = {};
+        let currentUser = null;
+        let heartbeatInterval = null;
+
+        // INITIALIZATION
+        window.onload = () => {
+            // Check if already logged in (Transient Session)
+            const saved = sessionStorage.getItem('crystalAdminUser');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                document.getElementById('loginOverlay').style.display = 'none';
+                updateSidebarProfile();
+                refreshAdmins();
+                loadContent();
+                startHeartbeat();
+            }
+        };
+
+        function startHeartbeat() {
+            if (heartbeatInterval) clearInterval(heartbeatInterval);
+            // Refresh every 60s to update "Last Seen" and see others
+            heartbeatInterval = setInterval(refreshAdmins, 60000);
+        }
+
+        function updateSidebarProfile() {
+            if (!currentUser) return;
+            document.getElementById('currentUserProfile').style.display = 'block';
+            document.getElementById('sidebarName').textContent = currentUser.name;
+
+            const roleEl = document.getElementById('sidebarRole');
+            roleEl.textContent = currentUser.role.toUpperCase();
+            if (currentUser.role === 'Owner') {
+                roleEl.style.backgroundColor = '#ecc94b';
+                roleEl.style.color = '#744210';
+            } else {
+                roleEl.style.backgroundColor = '#e2e8f0';
+                roleEl.style.color = '#4a5568';
+            }
+        }
+
+        // --- AUTH & LOGIN ---
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorEl = document.getElementById('loginError');
+
+            errorEl.style.display = 'none';
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = "Verifying...";
+            btn.disabled = true;
+
+            const res = await sendRequest('login', { email, password });
+
+            if (res.status === 'success') {
+                currentUser = res.data; // { name, email, role }
+                sessionStorage.setItem('crystalAdminUser', JSON.stringify(currentUser));
+                document.getElementById('loginOverlay').style.display = 'none';
+                updateSidebarProfile();
+                refreshAdmins();
+                loadContent();
+                startHeartbeat();
+            } else {
+                errorEl.textContent = res.message || "Wrong email or password.";
+                errorEl.style.display = 'block';
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function logout() {
+            try {
+                if (currentUser && currentUser.email) {
+                    // Update UI immediately while async logout happens
+                    const btn = document.querySelector('[onclick="logout()"]');
+                    if (btn) btn.textContent = "Signing out...";
+
+                    // Attempt network logout (best effort, don't wait forever)
+                    const logoutPromise = sendRequest('logout', { email: currentUser.email });
+                    // Race: only wait 2s max
+                    await Promise.race([
+                        logoutPromise,
+                        new Promise(resolve => setTimeout(resolve, 2000))
+                    ]);
+                }
+            } catch (e) {
+                console.error("Logout error", e);
+            } finally {
+                // ALWAYS run cleanup and redirect
+                sessionStorage.removeItem('crystalAdminUser');
+                window.location.href = "index.html";
+            }
+        }
+
+        // NAVIGATION
+        function switchView(viewName) {
+            // Update Sidebar
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            // Find the button that was clicked. If called programmatically, we might need a better way, but for now this works for clicks.
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            } else {
+                // Fallback for default state
+                const index = viewName === 'dashboard' ? 0 : 1;
+                document.querySelectorAll('.nav-item')[index].classList.add('active');
+            }
+
+            // Update Main Content
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewName + 'View').classList.add('active');
+        }
+
+        // --- CORE FUNCTIONS ---
+
+        function showStatus(text, type = 'success') {
+            const el = document.getElementById('statusMessage');
+            el.textContent = text;
+            el.className = ''; // Reset
+            el.classList.add('status-' + type);
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 3000);
+        }
+
+        async function sendRequest(action, data = {}) {
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: action, ...data })
+                });
+                return await response.json();
+            } catch (error) {
+                console.error(error);
+                showStatus("Connection failed.", 'error');
+                return { status: 'error', message: 'Connection failed' };
+            }
+        }
+
+        // --- ADMIN MANAGEMENT ---
+
+        // --- ADMIN MANAGEMENT ---
+
+        // --- ADMIN MANAGEMENT ---
+
+        async function refreshAdmins() {
+            if (!currentUser) return; // Guard
+
+            // Send requester info to get masked/unmasked data
+            const result = await sendRequest('getAdmins', { requesterEmail: currentUser.email });
+
+            if (result.status === 'success') {
+                renderAdminList(result.data);
+            }
+        }
+
+        function renderAdminList(admins) {
+            const container = document.getElementById('adminList');
+            if (admins.length === 0) {
+                container.innerHTML = '<div style="color: #718096; padding: 10px;">No admins found.</div>';
+                return;
+            }
+
+            container.innerHTML = ''; // Clear
+
+            admins.forEach(admin => {
+                const isOwner = admin.role === 'Owner';
+                const isMe = admin.email === currentUser.email;
+                const canRemove = currentUser.role === 'Owner' || (isMe && !isOwner);
+
+                // Presence Logic (Using Backend Status)
+                const isOnline = (admin.status === "Online");
+                const statusDot = isOnline
+                    ? '<span title="Online" style="color: #48bb78; font-size: 0.8rem; margin-right: 5px;">🟢</span>'
+                    : '<span title="Offline" style="color: #cbd5e0; font-size: 0.8rem; margin-right: 5px;">⚪</span>';
+
+
+                // Badge
+                const badge = isOwner
+                    ? '<span style="background: #ecc94b; color: #744210; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 5px;">OWNER</span>'
+                    : '<span style="background: #e2e8f0; color: #4a5568; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 5px;">ADMIN</span>';
+
+                const div = document.createElement('div');
+                div.className = 'admin-list-item';
+
+                let buttons = '';
+
+                // Show Credentials Button
+                buttons += `<button class="btn-primary" style="padding: 5px 10px; font-size: 0.8rem; margin-right: 5px;" onclick='showCredentials(${JSON.stringify(admin)})'>Show</button>`;
+
+                // Transfer Ownership
+                if (currentUser.role === 'Owner' && !isOwner) {
+                    buttons += `<button class="btn-primary" style="background-color: #805ad5; padding: 5px 10px; font-size: 0.8rem; margin-right: 5px;" onclick="transferOwnership('${admin.email}')">Transfer Owner</button>`;
+                }
+
+                // Remove Button
+                if (isOwner) {
+                    // Cannot remove owner
+                } else if (canRemove) {
+                    buttons += `<button class="btn-danger" style="padding: 5px 10px; font-size: 0.8rem;" onclick="deleteAdmin('${admin.email}')">Remove</button>`;
+                }
+
+                div.innerHTML = `
+                    <div>
+                        <div style="font-weight: 600; color: #2d3748;">
+                            ${statusDot} ${admin.name} ${badge}
+                        </div>
+                        <div style="font-size: 0.85rem; color: #718096; padding-left: 20px;">${admin.email}</div>
+                    </div>
+                    <div>${buttons}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function showCredentials(admin) {
+            document.getElementById('modalName').textContent = admin.name;
+            document.getElementById('modalEmail').textContent = admin.email;
+            document.getElementById('modalPassword').textContent = admin.password;
+            document.getElementById('credModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('credModal').style.display = 'none';
+        }
+
+        async function transferOwnership(newOwnerEmail) {
+            const confirmMsg = `WARNING: Are you sure you want to transfer ownership to ${newOwnerEmail}?\n\nYou will lose Owner privileges and become a regular Admin. This cannot be undone by you.`;
+            if (!confirm(confirmMsg)) return;
+
+            showStatus("Transferring ownership...", "info");
+            const res = await sendRequest('transferOwnership', {
+                currentOwnerEmail: currentUser.email,
+                newOwnerEmail: newOwnerEmail
+            });
+
+            if (res.status === 'success') {
+                showStatus("Ownership transferred. Reloading...");
+                setTimeout(() => {
+                    // Update session to reflect new role (Admin)
+                    currentUser.role = "Admin";
+                    sessionStorage.setItem('crystalAdminUser', JSON.stringify(currentUser));
+                    updateSidebarProfile(); // Update badge immediately
+                    refreshAdmins();
+                }, 1500);
+            } else {
+                showStatus(res.message, "error");
+            }
+        }
+
+        async function deleteAdmin(email) {
+            if (!confirm('Revoke access for ' + email + '?')) return;
+            const res = await sendRequest('removeAdmin', { email });
+            if (res.status === 'success') {
+                showStatus('Admin removed.');
+                refreshAdmins();
+            } else {
+                showStatus('Failed to remove admin.', 'error');
+            }
+        }
+
+        document.getElementById('addAdminForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('addName').value;
+            const email = document.getElementById('addEmail').value;
+            const password = document.getElementById('addPassword').value;
+
+            showStatus('Adding admin...', 'info');
+            const res = await sendRequest('addAdmin', { name, email, password });
+
+            if (res.status === 'success') {
+                showStatus('Admin added!');
+                document.getElementById('addAdminForm').reset();
+                refreshAdmins();
+            } else {
+                showStatus(res.message, 'error');
+            }
+        });
+
+        // --- CONTENT EDITOR ---
+
+        async function loadContent() {
+            const pageSelect = document.getElementById('pageSelector');
+            const page = pageSelect.value;
+
+            // Show loading
+            document.getElementById('editorLoading').style.display = 'block';
+            document.getElementById('editorFields').style.display = 'none';
+
+            // Load content
+            const res = await sendRequest('getContent', { page: page });
+
+            document.getElementById('editorLoading').style.display = 'none';
+            document.getElementById('editorFields').style.display = 'block';
+
+            if (res.status === 'success') {
+                siteContent[page] = res.data; // Store in cache
+                renderEditor();
+            } else {
+                showStatus('Failed to load content.', 'error');
+            }
+        }
+
+        function renderEditor() {
+            const page = document.getElementById('pageSelector').value;
+            const container = document.getElementById('editorFields');
+            // If fetching specific page content returns just that map, use it.
+            // But we stored it in siteContent[page] in loadContent above
+            const content = siteContent[page] || {};
+
+            container.innerHTML = '';
+
+            if (Object.keys(content).length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #a0aec0; padding: 40px;">No editable content found for this page yet. (Did you run the script setup?)</div>';
+                return;
+            }
+
+            // Sort keys to try and keep some order, or just iterate
+            Object.entries(content).forEach(([key, val]) => {
+                const group = document.createElement('div');
+                group.className = 'editor-group';
+
+                // Friendly Label Logic
+                let friendlyLabel = key.replace(/-/g, ' ').toUpperCase();
+
+                group.innerHTML = `
+                    <div class="editor-label">${friendlyLabel} <small style="color: #cbd5e0; font-weight: normal; text-transform: none;">(${key})</small></div>
+                    <textarea id="field_${key}">${val}</textarea>
+                    <div style="text-align: right; margin-top: 5px;">
+                        <button class="btn-primary" style="padding: 5px 15px; font-size: 0.8rem;" onclick="saveContent('${page}', '${key}')">Save</button>
+                    </div>
+                `;
+                container.appendChild(group);
+            });
+
+            // Add Save All Button
+            const saveAllBtn = document.createElement('div');
+            saveAllBtn.style.textAlign = 'right';
+            saveAllBtn.style.marginTop = '20px';
+            saveAllBtn.style.paddingTop = '20px';
+            saveAllBtn.style.borderTop = '1px solid #e2e8f0';
+            saveAllBtn.innerHTML = '<button class="btn-primary" style="background-color: #48bb78; font-size: 1rem; padding: 10px 20px;" onclick="saveAllChanges()">💾 Save All Changes</button>';
+            container.appendChild(saveAllBtn);
+        }
+
+        async function saveContent(page, id) {
+            // Fallback to batch with 1 item for consistency
+            await saveAllChanges(id);
+        }
+
+        async function saveAllChanges(specificId = null) {
+            const page = document.getElementById('pageSelector').value;
+            const updates = {};
+            let count = 0;
+            let btn;
+
+            // If specific ID, just save that one. If null, save ALL.
+            if (specificId) {
+                const textarea = document.getElementById(`field_${specificId}`);
+                updates[specificId] = textarea.value;
+                btn = textarea.nextElementSibling.querySelector('button');
+                const originalText = btn.textContent;
+                btn.textContent = "Saving...";
+                btn.disabled = true;
+
+                // Helper to reset button
+                var resetBtn = () => { btn.textContent = originalText; btn.disabled = false; };
+                count = 1;
+            } else {
+                // Collect ALL fields
+                const textareas = document.querySelectorAll('#editorFields textarea');
+                textareas.forEach(el => {
+                    const key = el.id.replace('field_', '');
+                    updates[key] = el.value;
+                    count++;
+                });
+                showStatus(`Saving ${count} fields...`, "info");
+            }
+
+            if (count === 0) return;
+
+            const res = await sendRequest('updateContentBatch', { page: page, updates: updates });
+
+            if (res.status === 'success') {
+                showStatus('Success! Saved successfully.', 'success');
+                // Update Runtime Cache
+                if (!siteContent[page]) siteContent[page] = {};
+                Object.assign(siteContent[page], updates);
+
+                // Update Persistent Client Cache (Instant Loading for Frontend)
+                // We merge with existing cache to ensure we don't lose other fields not currently edited
+                try {
+                    const cacheKey = `cms_cache_${page}`;
+                    const currentCache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+                    const newCache = { ...currentCache, ...updates };
+                    localStorage.setItem(cacheKey, JSON.stringify(newCache));
+                    console.log(`Admin: Updated local cache for ${page}`);
+                } catch (e) {
+                    console.warn("Admin: Failed to update local cache", e);
+                }
+
+                if (btn) resetBtn();
+            } else {
+                showStatus('Save Failed: ' + (res.message || 'Unknown Error'), 'error');
+                if (btn) resetBtn();
+            }
+        }
+
+        async function initializeDB() {
+            if (!confirm("WARNING: This will RESET the 'SiteContent' content to defaults. Any custom edits will be lost. Are you sure?")) return;
+            showStatus("Initializing Database...", "info");
+            const res = await sendRequest('setup');
+            if (res.status === 'success') {
+                showStatus("Database Reset Complete!", "success");
+                loadContent(); // Reload current view
+            } else {
+                showStatus("Reset Failed.", "error");
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
