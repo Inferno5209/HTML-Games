@@ -1,0 +1,738 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2c5f7d;
+    --secondary-color: #4a8fb5;
+    --accent-color: #d4a574;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #f8f9fa;
+    --white: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Fluid Typography: 
+       At 375px viewport (mobile), base size is 14px.
+       At 1440px viewport (desktop), base size is 18px.
+       Clamp ensures it never goes below 14px or above 18px.
+       1rem will now scale automatically based on the viewport width.
+    */
+    font-size: clamp(14px, 1vw + 10px, 18px);
+    background-color: #0d3320;
+    /* Footer Color - Removes white line at bottom */
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+}
+
+.container {
+    max-width: 75rem;
+    /* 1200px */
+    width: 90%;
+    /* Ensure it doesn't touch the edges on small screens */
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    /* 20px */
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #0d3320 0%, #1a4d2e 100%);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.625rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 75rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    flex-wrap: wrap;
+    /* Allow wrapping on very small screens */
+}
+
+.nav-logo a {
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    /* Prevent logo line break */
+}
+
+/* Vertical Trees Navigation (Desktop Only) */
+.vertical-trees-nav {
+    display: none;
+    /* Hidden by default on mobile */
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: transparent;
+    z-index: 900;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2E8B57;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: default;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+/* Responsive: Show Vertical Nav on Desktop */
+@media (min-width: 48.0625rem) {
+    .vertical-trees-nav {
+        display: flex;
+    }
+
+    body {
+        padding-left: 40px;
+    }
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    /* Allow links to wrap if needed */
+    justify-content: center;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    /* Base size, scales with html font-size */
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 70vh;
+    min-height: 31.25rem;
+    /* 500px */
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #0d3320;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-align: center;
+    padding: 1.25rem;
+}
+
+.hero-overlay h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.25rem;
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.7);
+}
+
+.hero-overlay p {
+    font-size: 1.5rem;
+    text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0, 0, 0, 0.7);
+}
+
+/* Opening Section */
+.opening-section {
+    padding: 2rem 0;
+    /* Reduced from 5rem to move text higher */
+    background: var(--bg-light);
+}
+
+.opening-content {
+    max-width: 62.5rem;
+    /* 1000px */
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.opening-content p {
+    margin-bottom: 1.25rem;
+}
+
+/* Placeholders */
+.carousel-placeholder {
+    width: 100%;
+    height: 25rem;
+    /* 400px */
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 0.125rem dashed #adb5bd;
+    margin-bottom: 1.25rem;
+}
+
+.carousel-placeholder p {
+    font-size: 1.5rem;
+    color: #6c757d;
+    font-weight: bold;
+}
+
+/* Video, Gallery, Map Sections */
+.video-section,
+.gallery-section,
+.map-section {
+    padding: 3.75rem 0;
+    background: var(--white);
+}
+
+.map-section {
+    background: var(--bg-light);
+}
+
+.video-section h2,
+.gallery-section h2,
+.map-section h2,
+.info-section h2,
+.cottages-section h2,
+.contact-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+}
+
+.map-container {
+    border-radius: 0.625rem;
+    overflow: hidden;
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
+}
+
+.address {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 1.2rem;
+}
+
+/* Info Sections */
+.info-section {
+    padding: 3.75rem 0;
+    background: var(--white);
+}
+
+.info-section.alt-bg {
+    background: var(--bg-light);
+}
+
+.info-content {
+    max-width: 62.5rem;
+    margin: 0 auto;
+}
+
+.info-content h3 {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin: 1.875rem 0 0.9375rem;
+}
+
+.info-content p {
+    margin-bottom: 1.25rem;
+}
+
+/* Cottages Section */
+.cottages-section {
+    padding: 3.75rem 0;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+}
+
+.cottages-intro {
+    text-align: center;
+    max-width: 50rem;
+    /* 800px */
+    margin: 0 auto 2.5rem;
+    font-size: 1.2rem;
+}
+
+.cottages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+    /* 280px */
+    gap: 1.875rem;
+    margin-top: 2.5rem;
+}
+
+.cottage-compact-card {
+    background: var(--white);
+    border-radius: 0.9375rem;
+    overflow: hidden;
+    box-shadow: 0 0.3125rem 1.25rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    border: 0.1875rem solid transparent;
+}
+
+.cottage-compact-card:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1.875rem rgba(74, 144, 226, 0.4), 0 0 1.5625rem rgba(74, 144, 226, 0.3);
+    border: 0.1875rem solid #4a90e2;
+}
+
+.cottage-compact-image {
+    width: 100%;
+    height: 15.625rem;
+    /* 250px */
+    overflow: hidden;
+}
+
+.cottage-compact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cottage-compact-card:hover .cottage-compact-image img {
+    transform: scale(1.1);
+}
+
+.cottage-compact-content {
+    padding: 1.5625rem;
+}
+
+.cottage-compact-content h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.625rem;
+}
+
+.cottage-capacity {
+    font-size: 0.95rem;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-bottom: 0.9375rem;
+}
+
+.cottage-summary {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 1.25rem;
+}
+
+.cottage-buttons {
+    display: flex;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.3125rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-details {
+    background: var(--secondary-color);
+    color: var(--white);
+    flex: 1;
+}
+
+.btn-details:hover {
+    background: var(--primary-color);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-book {
+    background: var(--accent-color);
+    color: var(--white);
+    flex: 1;
+}
+
+.btn-book:hover {
+    background: #c89658;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-book-large {
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 0.9375rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.btn-book-large:hover {
+    background: #c89658;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 3.75rem 0;
+    background: var(--white);
+}
+
+.contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.contact-card {
+    background: var(--bg-light);
+    padding: 1.875rem;
+    border-radius: 0.625rem;
+    text-align: center;
+    min-width: 18.75rem;
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.05);
+}
+
+.contact-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.9375rem;
+}
+
+.contact-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    background: #0d3320;
+    color: var(--white);
+    padding: 2.5rem 0;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 0.3125rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 48rem) {
+
+    /* 768px */
+    .hero-overlay h1 {
+        font-size: 2.5rem;
+    }
+
+    .nav-container {
+        position: relative;
+    }
+
+    .hamburger-menu {
+        display: block;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .bar {
+        display: block;
+        width: 1.5625rem;
+        height: 0.1875rem;
+        margin: 0.3125rem auto;
+        transition: all 0.3s ease-in-out;
+        background-color: var(--white);
+    }
+
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(0.5rem) rotate(45deg);
+    }
+
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-0.5rem) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        flex-direction: column;
+        background-color: #0d3320;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 0.625rem 1.6875rem rgba(0, 0, 0, 0.05);
+        justify-content: center;
+        padding-top: 3.75rem;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .nav-link {
+        font-size: 1.5rem;
+        display: block;
+        margin: 1.25rem 0;
+    }
+
+    .contact-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cottages-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* Section Icon Wrapper */
+.icon-wrapper {
+    position: relative;
+    display: block;
+    margin: -4rem auto -2rem;
+    /* Positioning moved here */
+    width: clamp(20rem, 50vw, 40rem);
+    /* Sizing moved here */
+    z-index: 10;
+}
+
+.section-icon {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+    /* Reset margins since wrapper handles it */
+}
+
+/* Hidden Admin Button */
+/* Hidden Admin Button */
+.hidden-admin-btn {
+    position: absolute;
+    top: 49%;
+    /* User's custom position */
+    left: 50%;
+    /* User's custom position */
+    transform: translate(-50%, -50%);
+    width: 4%;
+    /* User's custom size */
+    height: 4%;
+    /* User's custom size */
+    background: transparent;
+    /* Invisible */
+    opacity: 0;
+    /* Invisible */
+    cursor: pointer;
+    /* Keep pointer so you can find it */
+    z-index: 20;
+    border-radius: 50%;
+}
+
+/* FORCE HAMBURGER & PINE TREE NAV AND ENHANCE TREES */
+
+/* FORCE HAMBURGER & PINE TREE NAV AND ENHANCE TREES */
+.hamburger-btn {
+    display: flex !important;
+    align-items: center;
+    justify-self: end;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.hamburger-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Animation for active state */
+.hamburger-btn.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-btn.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px 0;
+    text-align: left;
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.hamburger-menu.active {
+    display: flex !important;
+}
+
+.hamburger-menu a {
+    display: block;
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Responsive Logo */
+/* Responsive Logo */
+.nav-logo a {
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-logo {
+    justify-self: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Responsive Container with vertical scaling padding */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 75rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem;
+}
+
+/* Responsive Trees */
+.nav-trees {
+    grid-column: 2;
+    justify-self: center;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #2E8B57;
+    font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+    user-select: none;
+    line-height: 1;
+    cursor: default;
+    letter-spacing: -2px;
+    width: 100%;
+}
+
+/* Mobile Landscape Tweaks (Horizontal phone usage) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-container {
+        padding: 0.2rem 0;
+    }
+
+    .hamburger-menu {
+        top: 45px;
+        height: calc(100vh - 45px);
+    }
+
+    .hamburger-menu a {
+        padding: 10px 40px;
+    }
+}
+
+/* Mobile Visibility Fix: Absolute Position (Updated for Flex) */
+@media (max-width: 48rem) {
+    .nav-container {
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .hamburger-btn {
+        position: static;
+        /* No longer need absolute since grid is gone */
+        transform: none;
+        width: 35px;
+        height: 24px;
+        z-index: 2100;
+    }
+}
+
+
+
+
+/* Hide original nav-menu if present */
+.nav-menu {
+    display: none !important;
+}

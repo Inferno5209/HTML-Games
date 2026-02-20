@@ -1,0 +1,549 @@
+/* Brown Camp - Rustic Theme */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Rustic Earth Tones */
+    --primary-color: #5D4037;
+    /* Brown */
+    --secondary-color: #33691E;
+    /* Forest Green */
+    --accent-color: #8D6E63;
+    /* Lighter Brown */
+    --text-dark: #3e2723;
+    --text-light: #5d4037;
+    --bg-light: #f4ece4;
+    /* Warm beige */
+    --white: #ffffff;
+    --shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+    /* 4px 6px */
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: clamp(14px, 1vw + 10px, 18px);
+    background-color: #3e2723;
+    /* Footer Color */
+}
+
+body {
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 68.75rem;
+    /* 1100px */
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    /* 20px */
+}
+
+/* Navigation */
+.navbar {
+    background: rgba(93, 64, 55, 0.95);
+    padding: 0.9375rem 0;
+    /* 15px */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.hamburger-menu {
+    display: flex;
+    gap: 1.875rem;
+    /* 30px */
+}
+
+.hamburger-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+.hamburger-menu a:hover {
+    color: var(--accent-color);
+}
+
+/* Cottage Header */
+.cottage-detail-header {
+    text-align: center;
+    padding: 3.75rem 0 2.5rem;
+    /* 60px 0 40px */
+    background-image: linear-gradient(to bottom, rgba(244, 236, 228, 0.8), rgba(244, 236, 228, 1)), url('main.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.875rem;
+    border-bottom: 0.1875rem solid var(--primary-color);
+}
+
+.cottage-detail-header h1 {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.9375rem;
+    text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(255, 255, 255, 0.8);
+}
+
+.cottage-tagline {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+}
+
+.cottage-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.875rem;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.625rem 1.25rem;
+    border-radius: 3.125rem;
+    display: inline-flex;
+    box-shadow: inset 0 0 0.625rem rgba(0, 0, 0, 0.05);
+}
+
+/* Sub Navigation */
+.cottage-sub-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.9375rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.sub-nav-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    background: var(--white);
+    padding: 0.75rem 1.5625rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid var(--primary-color);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.sub-nav-link:hover,
+.sub-nav-link.active {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-0.125rem);
+    box-shadow: var(--shadow);
+}
+
+/* Content Sections */
+.cottage-section {
+    background: var(--white);
+    padding: 3.125rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 3.75rem;
+    border-top: 0.3125rem solid var(--secondary-color);
+}
+
+.cottage-description h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5625rem;
+    border-bottom: 0.125rem solid #eee;
+    padding-bottom: 0.625rem;
+}
+
+.cottage-description p {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+/* Gallery Placeholder */
+.section-placeholder {
+    background-color: #eee;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-bottom: 2.5rem;
+    border: 0.125rem dashed var(--text-light);
+    color: var(--text-light);
+}
+
+.section-placeholder h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.625rem;
+}
+
+/* Floorplan */
+.floorplan-container {
+    text-align: center;
+    margin-top: 1.875rem;
+}
+
+.floorplan-image {
+    max-width: 100%;
+    height: auto;
+    border: 0.625rem solid #fff;
+    box-shadow: var(--shadow);
+}
+
+/* Booking CTA */
+.booking-cta {
+    text-align: center;
+    padding: 3.75rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 0.5rem;
+    margin-top: 3.75rem;
+}
+
+.booking-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.9375rem;
+}
+
+.btn-book-large {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--white);
+    padding: 0.9375rem 2.5rem;
+    border-radius: 3.125rem;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 1.5625rem;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-book-large:hover {
+    background: #795548;
+    transform: scale(1.05);
+}
+
+/* Sitemap */
+.sitemap-layout {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.sitemap-image {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+.sitemap-legend h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.sitemap-legend ul {
+    list-style: none;
+    margin-bottom: 1.25rem;
+}
+
+.sitemap-legend li {
+    margin-bottom: 0.5rem;
+}
+
+/* Amenities Grid */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+    gap: 1.875rem;
+}
+
+.amenity-category {
+    background: #fafafa;
+    padding: 1.5625rem;
+    border-radius: 0.5rem;
+    border-left: 0.25rem solid var(--secondary-color);
+}
+
+.amenity-category.full-width {
+    grid-column: 1 / -1;
+}
+
+.amenity-category h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.9375rem;
+    border-bottom: 0.0625rem solid #ddd;
+    padding-bottom: 0.625rem;
+}
+
+/* Footer */
+.footer {
+    background: #3e2723;
+    color: #d7ccc8;
+    text-align: center;
+    padding: 2.5rem 0;
+    margin-top: 3.75rem;
+}
+
+.back-link {
+    margin-bottom: 1.25rem;
+}
+
+.back-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hamburger Menu Button (Hidden on Desktop) */
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-btn.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile Responsive */
+@media (max-width: 48rem) {
+    /* 768px */
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .hamburger-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(93, 64, 55, 0.98);
+        /* Match navbar bg */
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out, padding 0.4s ease;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .hamburger-menu.active {
+        max-height: 500px;
+        padding: 1.25rem 0;
+        border-bottom: 3px solid var(--accent-color);
+    }
+
+    .hamburger-menu a {
+        display: block;
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hamburger-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .sitemap-layout {
+        flex-direction: column;
+    }
+
+    .cottage-detail-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .cottage-detail-header {
+        padding: 3.125rem 0 1.875rem;
+        min-height: 40vh;
+    }
+
+    .nav-container {
+        justify-content: space-between;
+        padding: 0 1.25rem;
+    }
+}
+
+/* FORCE HAMBURGER & PINE TREE NAV (Updated) */
+.hamburger-btn {
+    display: flex !important;
+    align-items: center;
+    justify-self: end;
+}
+
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 20px 0;
+    text-align: left;
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.hamburger-menu.active {
+    display: flex !important;
+}
+
+.hamburger-menu a {
+    display: block;
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Responsive Logo */
+/* Responsive Logo */
+.nav-logo a {
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-logo {
+    justify-self: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Responsive Container with vertical scaling padding */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 75rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem;
+}
+
+/* Vertical Trees Navigation (Desktop Only) */
+.vertical-trees-nav {
+    display: none;
+    /* Hidden by default on mobile */
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: transparent;
+    z-index: 900;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2E8B57;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: default;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+/* Responsive: Show Vertical Nav on Desktop */
+@media (min-width: 48.0625rem) {
+    .vertical-trees-nav {
+        display: flex;
+    }
+
+    body {
+        padding-left: 40px;
+    }
+}
+
+/* Mobile Landscape Tweaks (Horizontal phone usage) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-container {
+        padding: 0.2rem 0;
+    }
+
+    .hamburger-menu {
+        top: 45px;
+        height: calc(100vh - 45px);
+    }
+
+    .hamburger-menu a {
+        padding: 10px 40px;
+    }
+}
+
+/* Mobile Visibility Fix: Absolute Position */
+@media (max-width: 48rem) {
+    .nav-container {
+        position: relative;
+    }
+
+    .hamburger-btn {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35px;
+        /* Slightly bigger target */
+        height: 24px;
+        z-index: 2100;
+        /* Ensure on top */
+    }
+}

@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Camp - Testimonials - Crystal Acres</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- 1. Name -->
+            <div class="nav-logo">
+                <a href="../index.html">Crystal Acres Resort</a>
+            </div>
+
+            <!-- 2. Pine Trees (Center) - "A lot more" -->
+            <div class="nav-trees">
+                🌲<br>🌲<br>🌲<br>🌲<br>🌲<br>🌲<br><a href="../admin.html"
+                    style="text-decoration:none; cursor:default; color:inherit;">🌲</a><br>🌲<br>🌲<br>🌲<br>🌲<br>🌲<br>🌲
+            </div>
+
+            <!-- 3. Hamburger Button -->
+            <div class="hamburger-btn" onclick="toggleHamburgerMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <!-- 4. Menu Overlay -->
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <a href="../index.html" onclick="toggleHamburgerMenu(false)">Home</a>
+                <a href="../index.html#general-info" onclick="toggleHamburgerMenu(false)">General Information</a>
+                <a href="../index.html#things-to-do" onclick="toggleHamburgerMenu(false)">Things to Do</a>
+                <a href="../index.html#history" onclick="toggleHamburgerMenu(false)">History</a>
+                <a href="../index.html#cottages" onclick="toggleHamburgerMenu(false)">The Cottages</a>
+                <a href="../index.html#contact" onclick="toggleHamburgerMenu(false)">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Vertical Side Navigation (Trees) -->
+    <div class="vertical-trees-nav">
+        🌲<br>🌲<br>🌲<br>🌲<br>🌲<br>🌲<br><a href="../admin.html" style="text-decoration:none; cursor:default; color:inherit;">🌲</a><br>🌲<br>🌲<br>🌲<br>🌲<br>🌲<br>🌲
+    </div>
+    <section class="cottage-detail-page">
+        <div class="container">
+            <div class="back-link">
+                <a href="../index.html#cottages">&larr; Back to All Cottages</a>
+            </div>
+            <div class="cottage-detail-header">
+                <h1>The Brown Camp</h1>
+                <p class="cottage-tagline">Guest Testimonials</p>
+            </div>
+            <nav class="cottage-sub-nav">
+                <a href="index.html" class="sub-nav-link">Photos & Details</a>
+                <a href="testimonials.html" class="sub-nav-link active">Testimonials</a>
+                <a href="floorplan.html" class="sub-nav-link">Floor Plan</a>
+                <a href="sitemap.html" class="sub-nav-link">Site Map</a>
+                <a href="amenities.html" class="sub-nav-link">Amenities</a>
+            </nav>
+            <div class="cottage-section">
+                <h2>Guest Testimonials</h2>
+                <div class="section-placeholder">
+                    <p>No reviews yet. Be the first to share your experience!</p>
+                </div>
+                <div class="booking-cta">
+                    <button class="btn btn-book-large">Add Review</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Crystal Acres. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../cottage-nav.js"></script>
+</body>
+
+</html>

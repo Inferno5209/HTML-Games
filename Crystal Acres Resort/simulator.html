@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Simulator - Crystal Acres Resort</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #333;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .toolbar {
+            padding: 10px 20px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .toolbar h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            margin-right: auto;
+        }
+
+        .device-btn {
+            background-color: #444;
+            color: white;
+            border: 1px solid #555;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .device-btn:hover,
+        .device-btn.active {
+            background-color: #0d3320;
+            border-color: #1a5c3a;
+        }
+
+        .rotate-btn {
+            background-color: #007bff;
+            border-color: #0056b3;
+        }
+
+        .rotate-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            background-color: #bd2130;
+        }
+
+        .preview-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #1a1a1a;
+            overflow: auto;
+        }
+
+        iframe {
+            background-color: white;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        /* Device Sizes */
+        .mobile-s {
+            width: 320px;
+            height: 568px;
+        }
+
+        .mobile-m {
+            width: 375px;
+            height: 667px;
+        }
+
+        .tablet {
+            width: 768px;
+            height: 1024px;
+        }
+
+        .desktop {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Landscape Variants */
+        .mobile-s.landscape {
+            width: 568px;
+            height: 320px;
+        }
+
+        .mobile-m.landscape {
+            width: 667px;
+            height: 375px;
+        }
+
+        .tablet.landscape {
+            width: 1024px;
+            height: 768px;
+        }
+
+        .desktop-wrapper {
+            width: 90%;
+            height: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toolbar">
+        <h1>Device Simulator</h1>
+        <button class="device-btn" onclick="resize('mobile-s')">Mobile S</button>
+        <button class="device-btn" onclick="resize('mobile-m')">Mobile M</button>
+        <button class="device-btn" onclick="resize('tablet')">Tablet</button>
+        <button class="device-btn active" onclick="resize('desktop')">Desktop</button>
+        <div style="width: 1px; height: 20px; background: #555; margin: 0 10px;"></div>
+        <button class="device-btn rotate-btn" onclick="toggleRotate()">Rotate ⟳</button>
+        <a href="index.html" class="back-btn">Exit Simulator</a>
+    </div>
+
+    <div class="preview-area">
+        <iframe id="frame" src="index.html" class="desktop-wrapper"></iframe>
+    </div>
+
+    <script>
+        let currentDevice = 'desktop';
+        let isLandscape = false;
+
+        function resize(device) {
+            currentDevice = device;
+            isLandscape = false; // Reset landscape when changing device
+            updateFrame();
+
+            // Update active button state
+            document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
+            // Find the button that called this function - approximating by text content for simplicity in this generated code context, 
+            // or we'd pass 'this' in HTML. Let's use event.target if available.
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+
+        function toggleRotate() {
+            if (currentDevice === 'desktop') {
+                alert("Rotation is only for mobile/tablet devices.");
+                return;
+            }
+            isLandscape = !isLandscape;
+            updateFrame();
+        }
+
+        function updateFrame() {
+            const frame = document.getElementById('frame');
+
+            // Base Class
+            if (currentDevice === 'desktop') {
+                frame.className = 'desktop-wrapper';
+                isLandscape = false; // Reset landscape if switching to desktop
+            } else {
+                frame.className = currentDevice;
+                if (isLandscape) {
+                    frame.classList.add('landscape');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
