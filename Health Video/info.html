@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Abstinence - Health Project Information Page">
+    <title>Abstinence Info | Health Project</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(129, 140, 248, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #818cf8;
+            --accent-glow: rgba(129, 140, 248, 0.15);
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, 0.1);
+            --green-border: rgba(52, 211, 153, 0.25);
+            --red: #f87171;
+            --red-bg: rgba(248, 113, 113, 0.1);
+            --red-border: rgba(248, 113, 113, 0.25);
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, 0.1);
+            --blue-border: rgba(96, 165, 250, 0.25);
+            --yellow: #fbbf24;
+            --yellow-bg: rgba(251, 191, 36, 0.1);
+            --yellow-border: rgba(251, 191, 36, 0.25);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Subtle background gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(129, 140, 248, 0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(52, 211, 153, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-color: var(--border-accent);
+            transform: translateX(-3px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .back-btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover svg {
+            transform: translateX(-3px);
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section styles */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Two-column grid for advantages/disadvantages */
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .pros-cons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pro-card {
+            background: var(--green-bg);
+            border: 1px solid var(--green-border);
+        }
+
+        .pro-card:hover {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: var(--green);
+        }
+
+        .con-card {
+            background: var(--red-bg);
+            border: 1px solid var(--red-border);
+        }
+
+        .con-card:hover {
+            background: rgba(248, 113, 113, 0.15);
+            border-color: var(--red);
+        }
+
+        .card-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .pro-card .card-label {
+            color: var(--green);
+        }
+
+        .con-card .card-label {
+            color: var(--red);
+        }
+
+        .card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .card ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .pro-card ul li::before {
+            background: var(--green);
+        }
+
+        .con-card ul li::before {
+            background: var(--red);
+        }
+
+        /* Script section */
+        .script-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .script-line {
+            display: flex;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: background 0.2s ease;
+        }
+
+        .script-line:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .script-line .line-num {
+            flex-shrink: 0;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        .script-line .line-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            padding-top: 3px;
+        }
+
+        /* Fact cards */
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .fact-card {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-border);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .fact-card:hover {
+            background: rgba(96, 165, 250, 0.15);
+            border-color: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        .fact-card .fact-stat {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--blue);
+            margin-bottom: 6px;
+        }
+
+        .fact-card .fact-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Sources list */
+        .sources-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sources-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .sources-list li:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+        }
+
+        .sources-list li .source-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--yellow-bg);
+            border: 1px solid var(--yellow-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .sources-list li a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .sources-list li a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+
+
+        /* Workload section */
+        .workload-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+        }
+
+        .workload-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .workload-details h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .workload-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Scroll animations */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .section:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .section:nth-child(8) {
+            animation-delay: 0.7s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Back to Presentation -->
+    <a href="index.html" class="back-btn" id="backBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to Presentation
+    </a>
+
+    <div class="container">
+
+        <!-- Hero -->
+        <div class="hero animate-in">
+            <span class="hero-badge">Health Education Project</span>
+            <h1>Abstinence</h1>
+            <p>A comprehensive look at abstinence as a contraceptive method — what it is, how it works, and why it
+                matters.</p>
+        </div>
+
+        <!-- What Is It? -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--blue-bg); border: 1px solid var(--blue-border);">📖
+                </div>
+                <h2>What Is Abstinence?</h2>
+            </div>
+            <div class="card">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8;">
+                    Abstinence means choosing <strong style="color: var(--text-primary);">not to have sexual
+                        intercourse</strong>. It is a personal decision, not a device or medication. Unlike other
+                    contraceptive methods, abstinence does not involve anything physical you can see, use, or purchase.
+                    It works by completely avoiding sexual activity, preventing sperm from ever coming into contact with
+                    an egg.
+                </p>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon"
+                    style="background: var(--accent-glow); border: 1px solid var(--border-accent);">⚙️</div>
+                <h2>How It Works</h2>
+            </div>
+            <div class="card">
+                <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8;">
+                    Abstinence works through one straightforward principle: <strong
+                        style="color: var(--text-primary);">if no sexual intercourse occurs, pregnancy cannot
+                        happen</strong>. There is no chance for sperm to reach and fertilize an egg. When practiced
+                    consistently, it is the only method that is <strong style="color: var(--green);">100%
+                        effective</strong> at preventing both pregnancy and sexually transmitted infections (STIs).
+                </p>
+            </div>
+        </div>
+
+        <!-- Key Facts -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--yellow-bg); border: 1px solid var(--yellow-border);">
+                    📊</div>
+                <h2>Key Facts</h2>
+            </div>
+            <div class="fact-grid">
+                <div class="fact-card">
+                    <div class="fact-stat">100%</div>
+                    <div class="fact-desc">Effective at preventing pregnancy when practiced consistently</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-stat">$0</div>
+                    <div class="fact-desc">Cost — abstinence is completely free with no expenses whatsoever</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-stat">0</div>
+                    <div class="fact-desc">Side effects — no hormonal, physical, or medical side effects</div>
+                </div>
+                <div class="fact-card">
+                    <div class="fact-stat">Only</div>
+                    <div class="fact-desc">Method that fully prevents both pregnancy and all STIs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advantages & Disadvantages -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--green-bg); border: 1px solid var(--green-border);">⚖️
+                </div>
+                <h2>Advantages & Disadvantages</h2>
+            </div>
+            <div class="pros-cons-grid">
+                <div class="card pro-card">
+                    <div class="card-label">✓ Advantages</div>
+                    <ul>
+                        <li>100% effective at preventing pregnancy</li>
+                        <li>Fully prevents sexually transmitted infections</li>
+                        <li>Completely free — no costs at all</li>
+                        <li>No side effects (hormonal or physical)</li>
+                        <li>Requires no doctor visits or prescriptions</li>
+                        <li>Can be practiced by anyone at any time</li>
+                        <li>No age restrictions or eligibility requirements</li>
+                        <li>Reversible at any time — simply a personal choice</li>
+                    </ul>
+                </div>
+                <div class="card con-card">
+                    <div class="card-label">✗ Disadvantages</div>
+                    <ul>
+                        <li>Requires strong self-control and willpower</li>
+                        <li>Needs clear communication and agreement between partners</li>
+                        <li>May be difficult to maintain long-term</li>
+                        <li>Social or peer pressure can make it challenging</li>
+                        <li>Does not address or treat any existing STIs</li>
+                        <li>May not align with everyone's personal values or lifestyle</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Script -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon"
+                    style="background: var(--accent-glow); border: 1px solid var(--border-accent);">🎬</div>
+                <h2>Video Script</h2>
+            </div>
+            <div class="card">
+                <div class="script-lines">
+                    <div class="script-line">
+                        <span class="line-num">Riley 1</span>
+                        <span class="line-text">Hi, my name is Riley Santor, and today I'm presenting information about
+                            the contraceptive method called abstinence.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 2</span>
+                        <span class="line-text">Abstinence means choosing not to have sexual intercourse. It is a
+                            personal decision, not a device or medication.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 3</span>
+                        <span class="line-text">Unlike other contraceptive methods, abstinence does not involve anything
+                            physical you can see, use, or purchase.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 4</span>
+                        <span class="line-text">Abstinence works by completely avoiding sexual activity, preventing
+                            sperm from coming into contact with an egg.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 5</span>
+                        <span class="line-text">Since no intercourse occurs, pregnancy cannot happen when abstinence is
+                            practiced consistently.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 6</span>
+                        <span class="line-text">Abstinence is 100% effective at preventing pregnancy and is the only
+                            method that fully prevents sexually transmitted infections.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 7</span>
+                        <span class="line-text">Some advantages include that it is free, has no side effects, and
+                            requires no doctor visits or prescriptions.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 8</span>
+                        <span class="line-text">It can be practiced by anyone at any time and completely protects
+                            against both pregnancy and STIs.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 9</span>
+                        <span class="line-text">One disadvantage is that it requires strong self-control and clear
+                            agreement between partners.</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="line-num">Riley 10</span>
+                        <span class="line-text">Information for this presentation was gathered from health textbooks,
+                            school materials, and trusted sources like the CDC and Planned Parenthood.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workload -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--yellow-bg); border: 1px solid var(--yellow-border);">
+                    👥</div>
+                <h2>Workload</h2>
+            </div>
+            <div class="workload-info">
+                <div class="workload-avatar">RS</div>
+                <div class="workload-details">
+                    <h3>Riley Santor</h3>
+                    <p>Research, script writing, video recording, presentation design, and website creation — all work
+                        completed independently.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sources -->
+        <div class="section animate-in">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--yellow-bg); border: 1px solid var(--yellow-border);">
+                    📚</div>
+                <h2>Sources</h2>
+            </div>
+            <ul class="sources-list">
+                <li>
+                    <span class="source-icon">🏛️</span>
+                    <span><strong>CDC</strong> — Centers for Disease Control and Prevention: <a
+                            href="https://www.cdc.gov/std/prevention" target="_blank"
+                            rel="noopener">cdc.gov/std/prevention</a></span>
+                </li>
+                <li>
+                    <span class="source-icon">🩺</span>
+                    <span><strong>Planned Parenthood</strong> — <a
+                            href="https://www.plannedparenthood.org/learn/birth-control/abstinence-and-outercourse"
+                            target="_blank" rel="noopener">plannedparenthood.org — Abstinence</a></span>
+                </li>
+                <li>
+                    <span class="source-icon">📖</span>
+                    <span><strong>Health Textbook</strong> — Class-issued health education textbook and school
+                        materials</span>
+                </li>
+                <li>
+                    <span class="source-icon">🏥</span>
+                    <span><strong>Mayo Clinic</strong> — <a
+                            href="https://www.mayoclinic.org/healthy-lifestyle/birth-control" target="_blank"
+                            rel="noopener">mayoclinic.org — Birth Control</a></span>
+                </li>
+            </ul>
+        </div>
+
+
+
+        <!-- Footer -->
+        <div class="footer animate-in">
+            <p>Health Education Project — Abstinence Presentation &copy; 2026</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
