@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Acres Admin</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS reset & base */
+        html,
+        body {
+            --sidebar-width: 250px;
+            --admin-bg: #f4f6f8;
+            --sidebar-bg: #1a202c;
+            --sidebar-text: #a0aec0;
+            --sidebar-active: #fff;
+            --primary-accent: #2b6cb0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--admin-bg);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .nav-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: #2d3748;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background-color: #2d3748;
+            color: var(--sidebar-active);
+            border-left-color: var(--primary-accent);
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        .back-link {
+            padding: 15px 20px;
+            color: #bd2130;
+            text-decoration: none;
+            border-top: 1px solid #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: #ff6b6b;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .view-section {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards & Forms */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #38a169;
+            color: white;
+        }
+
+        /* Admin List */
+        .admin-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Status Toast */
+        #statusMessage {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .status-success {
+            background-color: #38a169;
+        }
+
+        .status-error {
+            background-color: #e53e3e;
+        }
+
+        .status-info {
+            background-color: #3182ce;
+        }
+
+        /* Editor Styles */
+        .editor-group {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .editor-label {
+            font-size: 0.85rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .credential-row {
+            margin-bottom: 15px;
+        }
+
+        .credential-label {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 4px;
+        }
+
+        .credential-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            font-family: monospace;
+        }
+    </style>
+    <script src="OS.js"></script>
+</head>
+
+</style>
+</head>
+
+<body>
+    <!-- Login Overlay -->
+    <div id="loginOverlay"
+        style="position: fixed; inset: 0; background: #1a202c; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+        <div class="card" style="width: 350px; text-align: center;">
+            <h2 style="margin-bottom: 20px;">Crystal Admin Login</h2>
+            <script src="https://accounts.google.com/gsi/client" async></script>
+            <div id="g_id_onload"
+                data-client_id="854378873752-m072m1v4j8jltp2i2qsln7kdfk2scnsb.apps.googleusercontent.com"
+                data-context="use"
+                data-ux_mode="popup"
+                data-callback="handleGoogleLogin"
+                data-auto_prompt="false">
+            </div>
+            
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left"
+                style="display: flex; justify-content: center; margin-bottom: 15px;">
+            </div>
+
+            <div id="loginError" style="color: #e53e3e; margin-bottom: 10px; font-size: 0.9rem; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Crystal Admin</h2>
+            <div id="currentUserProfile"
+                style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #2d3748; display: none;">
+                <div style="font-size: 0.9rem; color: #a0aec0;">Logged in as:</div>
+                <div id="sidebarName" style="color: white; font-weight: 600; margin-top: 2px;"></div>
+                <div id="sidebarRole"
+                    style="display: inline-block; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-top: 5px; font-weight: bold;">
+                </div>
+            </div>
+        </div>
+        <div class="nav-item active" onclick="switchView('dashboard')">Dashboards & Admins</div>
+        <div class="nav-item" onclick="switchView('editor')">Website Content Editor</div>
+        <div class="nav-spacer"></div>
+        <div class="nav-item" style="color: #e53e3e; margin-top: auto;" onclick="initializeDB()">⚠ Reset Editor Content
+        </div>
+        <div class="nav-item" onclick="logout()">Sign Out</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="statusMessage"></div>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboardView" class="view-section active">
+            <div class="card">
+                <h2>Manage Administrators</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="color: #718096; margin: 0;">Authorized users who can access this panel.</p>
+                    <button class="btn-primary" onclick="refreshAdmins()">Refresh List</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Add Admin -->
+                <div class="card">
+                    <h3>Add New Admin</h3>
+                    <form id="addAdminForm">
+                        <label>Full Name</label>
+                        <input type="text" id="addName" required placeholder="John Doe">
+                        <label>Email Address</label>
+                        <input type="email" id="addEmail" required placeholder="name@example.com">
+                        <label>Password</label>
+                        <input type="text" id="addPassword" required placeholder="Choose a secure password">
+                        <button type="submit" class="btn-success" style="width: 100%">Grant Access</button>
+                    </form>
+                </div>
+
+                <!-- Admin List -->
+                <div class="card">
+                    <h3>Current Admins</h3>
+                    <div id="loadingAdmins" style="color: #718096; display: none;">Fetching data...</div>
+                    <div id="adminList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Credential Modal -->
+        <div id="credModal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 style="margin-top: 0;">Admin Credentials</h3>
+                <div class="credential-row">
+                    <div class="credential-label">Name</div>
+                    <div class="credential-value" id="modalName"></div>
+                </div>
+                <div class="credential-row">
+                    <div class="credential-label">Email</div>
+                    <div class="credential-value" id="modalEmail"></div>
+                </div>
+                <div class="credential-row">
+                    <div class="credential-label">Password</div>
+                    <div class="credential-value" id="modalPassword" style="color: #e53e3e;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <div id="modalActionButtons"></div>
+                    <button class="btn-primary" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDITOR VIEW -->
+        <div id="editorView" class="view-section">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <h2 style="margin: 0;">Content Editor</h2>
+                        <p style="color: #718096; margin: 5px 0 0;">Edit text content across the website.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <label
+                            style="font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 5px; text-align: left;">Editing
+                            Page:</label>
+                        <select id="pageSelector" class="header-select" onchange="loadContent()">
+                            <option value="home">Home Page</option>
+                            <option value="villa">The Villa</option>
+                            <option value="browncamp">Brown Camp</option>
+                            <option value="bunkhouse">Bunkhouse</option>
+                            <option value="shanty">The Shanty</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="editorLoading" style="text-align: center; color: #718096; padding: 40px; display: none;">
+                    Loading content from Google Sheet...
+                </div>
+
+                <div id="editorControls"
+                    style="display: none; background: #ebf8fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #bee3f8; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div>
+                            <span id="editStatusBadge"
+                                style="background: #e2e8f0; color: #4a5568; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-right: 10px;">VIEW
+                                MODE</span>
+                            <span style="font-size: 0.9rem; color: #2d3748;">Click 'Enable Editing' to modify the page
+                                directly.</span>
+                        </div>
+                        <div>
+                            <button id="toggleEditBtn" class="btn-primary"
+                                style="background-color: #3182ce; margin-right: 10px;" onclick="toggleEditMode()">Enable
+                                Editing</button>
+                            <button id="saveWysiwygBtn" class="btn-success" style="display: none;"
+                                onclick="requestWysiwygSave()">💾 Save All Changes</button>
+                        </div>
+                    </div>
+
+                    <div id="textFormattingToolbar"
+                        style="display: none; align-items: center; gap: 10px; padding-top: 15px; border-top: 1px dashed #bee3f8; width: 100%;">
+                        <span style="font-size: 0.85rem; font-weight: bold; color: #2c5f7d;">Formatting:</span>
+                        <div style="display: flex; gap: 4px; border-right: 1px solid #cbd5e0; padding-right: 10px;">
+                            <button id="btnFormatBold" onclick="execFormatting('bold', true)" title="Bold"
+                                style="padding: 4px 10px; border-radius: 4px; border: 1px solid #cbd5e0; background: white; font-weight: bold; cursor: pointer; color: #2d3748;">B</button>
+                            <button id="btnFormatItalic" onclick="execFormatting('italic', true)" title="Italic"
+                                style="padding: 4px 10px; border-radius: 4px; border: 1px solid #cbd5e0; background: white; font-style: italic; cursor: pointer; font-family: serif; color: #2d3748;">I</button>
+                            <button id="btnFormatUnderline" onclick="execFormatting('underline', true)"
+                                title="Underline"
+                                style="padding: 4px 10px; border-radius: 4px; border: 1px solid #cbd5e0; background: white; text-decoration: underline; cursor: pointer; color: #2d3748;">U</button>
+                        </div>
+                        <select id="fontFamilySelect" onchange="execFormatting('fontName', this.value)"
+                            style="padding: 6px; border-radius: 4px; border: 1px solid #cbd5e0; font-size: 0.85rem; min-width: 150px; background: white;">
+                            <option value="">(Select Font)</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Palatino Linotype">Palatino</option>
+                            <option value="Courier New">Courier</option>
+                        </select>
+                        <input type="number" id="fontSizeInput"
+                            onchange="execFormatting('fontSize', this.value ? this.value + 'px' : '')"
+                            style="padding: 6px; border-radius: 4px; border: 1px solid #cbd5e0; font-size: 0.85rem; width: 80px; background: white;"
+                            placeholder="Size" list="fontSizeOptions" min="8" max="144">
+                        <datalist id="fontSizeOptions">
+                            <option value="12"></option>
+                            <option value="14"></option>
+                            <option value="16"></option>
+                            <option value="18"></option>
+                            <option value="20"></option>
+                            <option value="24"></option>
+                            <option value="32"></option>
+                            <option value="48"></option>
+                            <option value="64"></option>
+                        </datalist>
+                    </div>
+                </div>
+
+                <div id="editorFrameContainer"
+                    style="border: 2px solid #e2e8f0; border-radius: 8px; overflow: hidden; height: 600px; display: none;">
+                    <iframe id="wysiwygFrame" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+
+                <div id="editorDefaultMsg"
+                    style="text-align: center; padding: 40px; color: #a0aec0; border: 2px dashed #e2e8f0; border-radius: 8px;">
+                    Select a page above to begin editing.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
